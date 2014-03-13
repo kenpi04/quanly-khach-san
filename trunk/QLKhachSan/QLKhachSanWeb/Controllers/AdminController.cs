@@ -229,7 +229,7 @@ namespace QLKhachSanWeb.Controllers
                         PageInfo = new PageInfo
                         {
                             CurrentPage = size,
-                            ItemsPerPage = 30,
+                            ItemsPerPage = 25,
                             TotalItems = model.Count()
                         }
                     };
