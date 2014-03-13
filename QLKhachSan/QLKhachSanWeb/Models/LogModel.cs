@@ -14,4 +14,10 @@ namespace QLKhachSanWeb.Models
         public int UserId { get; set; }
         public string CreateDate { get; set; }
     }
+
+    public class ListLogModel 
+    {
+        public IEnumerable<QLKhachSanWeb.Models.LogModel> ListLogs { get; set; }
+        public PageInfo PageInfo { get; set; }
+    }
 }

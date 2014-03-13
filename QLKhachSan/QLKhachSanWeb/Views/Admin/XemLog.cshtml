@@ -2,7 +2,7 @@
     ViewBag.Title = "XemLog";
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
-@model List<QLKhachSanWeb.Models.LogModel>
+@model QLKhachSanWeb.Models.ListLogModel
 <table>
     <tr>
         <td>Mã nhật kí</td>
@@ -10,7 +10,7 @@
         <td>Hành động</td>
         <td>Người thực hiện</td>
     </tr>
-     @foreach (QLKhachSanWeb.Models.LogModel team in Model)
+     @foreach (QLKhachSanWeb.Models.LogModel team in Model.ListLogs)
      {
          <tr>
              <td>@team.id</td>
@@ -19,4 +19,16 @@
              <td>@team.UserName</td>
          </tr>
      }
+    <tr>
+        <td>
+            <div>Trang:
+            @{for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
+              {
+                <a href="@Url.Action("XemLog","Admin", new { page=@i})">@i</a>
+              }
+            }
+            </div>
+        </td>
+    </tr>
 </table>
+ 

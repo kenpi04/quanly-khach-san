@@ -182,8 +182,9 @@ namespace QLKhachSanWeb.Controllers
         //Logs
         #region Xem Logs
 
-        public ActionResult XemLog()
+        public ActionResult XemLog(int? page)
         {
+            int size = Convert.ToInt32(page);
             User team1 = KTQUyen();
             if (team1 == null)
                 return RedirectToAction("Login", "Login");
@@ -206,7 +207,21 @@ namespace QLKhachSanWeb.Controllers
                         team.CreateDate = lg.CreatedDate.ToString();
                         model.Add(team);
                     }
-                    return View(model);
+
+                    ListLogModel modelview = new ListLogModel()
+                    {
+                        ListLogs = model
+                        .Skip((size - 1) * 25)
+                        .Take(25),
+                        PageInfo = new PageInfo
+                        {
+                            CurrentPage = size,
+                            ItemsPerPage = 30,
+                            TotalItems = model.Count()
+                        }
+                    };
+
+                    return View(modelview);
                 }
             }
         }
