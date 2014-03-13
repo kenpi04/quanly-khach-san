@@ -24,7 +24,8 @@
                    <tr>
                        <td>Loại phòng : </td>
                         <td>
-                           @Html.DropDownListFor(p=>p.ServiceTypeId, (IEnumerable<SelectListItem>)ViewBag.ListTypeService, "---Chọn ---")
+                           @Html.DropDownListFor(p=>p.ServiceTypeId, (IEnumerable<SelectListItem>)ViewBag.ListTypeService)
+                           @Html.ValidationMessageFor(x => x.ServiceTypeId)
                         </td>
                    </tr>
                     <tr>
