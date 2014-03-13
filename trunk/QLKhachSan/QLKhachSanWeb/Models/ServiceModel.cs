@@ -10,21 +10,21 @@ namespace QLKhachSanWeb.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng tên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng tầng")]
+        [Required(ErrorMessage = "Vui lòng nhập tầng")]
         public string FloorNumber { get; set; }
 
         public bool IsRoom { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng loại phòng")]
+        [Required(ErrorMessage = "Vui lòng nhập loại phòng")]
         public int ServiceTypeId { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng giá")]
+        [Required(ErrorMessage = "Vui lòng nhập giá")]
         public string Price { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng mô tả")]
+        [Required(ErrorMessage = "Vui lòng nhập mô tả")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập loại hoạt động")]
