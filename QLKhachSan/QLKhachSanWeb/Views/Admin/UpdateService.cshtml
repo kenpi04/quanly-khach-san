@@ -29,8 +29,8 @@
                         </td>
                     </tr> 
                       <tr>
-                        <td class="lb">Tình trạng :</td>
-                        <td class="ct">
+                        <td >Tình trạng :</td>
+                        <td >
                               @Html.DropDownListFor(x => x.IsActive,new List<SelectListItem>(){ 
                             new SelectListItem { Value = "1", Text = "Hoạt động" }
                             ,new SelectListItem { Value = "2", Text = "Không hoạt động" }
@@ -39,7 +39,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="submit-form">
+                <div>
                     <input type="submit" id="btnSave" value="Cập nhật"/>
                 </div>
             </div>

@@ -6,33 +6,33 @@
 <h1>Thêm tài khoản mới</h1>
         @using (Html.BeginForm())
         {
-                 <div class="pcontent">
+                 <div>
        
-                <table class="form">
+                <table>
                     <tr>
-                        <td class="lb">Họ và tên:</td>
-                        <td class="ct">
+                        <td>Họ và tên:</td>
+                        <td>
                             @Html.EditorFor(x => x.Name)
                             @Html.ValidationMessageFor(x => x.Name)
                         </td>
                     </tr>
                     <tr>
-                       <td class="lb">Tên đăng nhập:</td>
-                        <td class="ct">
+                       <td>Tên đăng nhập:</td>
+                        <td>
                             @Html.EditorFor(x => x.UserName)
                             @Html.ValidationMessageFor(x => x.UserName)
                         </td>
                     </tr>
                         <tr>
-                       <td class="lb">Mật Khẩu :</td>
-                        <td class="ct">
+                       <td>Mật Khẩu :</td>
+                        <td>
                             @Html.EditorFor(x => x.Password)
                             @Html.ValidationMessageFor(x => x.Password)
                         </td>
                     </tr>
                       <tr>
-                        <td class="lb">Loại nhân viên :</td>
-                        <td class="ct">
+                        <td>Loại nhân viên :</td>
+                        <td>
                             @Html.DropDownListFor(x => x.PermissonId,new List<SelectListItem>(){ 
                             new SelectListItem { Value = "1", Text = "Quản lý" }
                             ,new SelectListItem { Value = "2", Text = "Nhân viên" }
@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="submit-form">
+                <div>
                     <input type="submit" id="btnSave" value="Thêm mới"/>
                 </div>
             </div>
