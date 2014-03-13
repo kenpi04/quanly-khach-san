@@ -360,14 +360,14 @@ namespace EntityLibrary
 
 
 
-       public object GetListUsers()
+       public IList<User> GetListUsers()
        {
-           throw new NotImplementedException();
+           return db.Users.Where(x => x.IsActive).ToList();
        }
 
        public User GetUsersByID(int id)
        {
-           throw new NotImplementedException();
+           return db.Users.Single(x => x.Id.Equals(id));
        }
     }
 }
