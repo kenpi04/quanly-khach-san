@@ -1,0 +1,13 @@
+﻿@model EntityLibrary.BookingInfo
+
+<div class="tooltip">
+    <span>Tên: @Model.CustomerName</span><br />
+    <span>SĐT:@Model.PhoneNumber</span><br />
+     <span>CMND:@Model.CustomerCardNo</span><br />
+    <span>Ngày đặt:@Model.BookingDate.Value.ToString("dd/MM/yyyy")</span><br />
+    <span>Ngày nhận phòng :@Model.CheckingDate.Value.ToString("dd/MM/yyyy")</span><br />
+     <span>Ngày trả phòng :@Model.CheckOutDate.Value.ToString("dd/MM/yyyy")</span><br />
+   
+   
+    
+</div>

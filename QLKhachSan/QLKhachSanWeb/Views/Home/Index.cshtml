@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+    }
+@if (ViewBag.QuyenUser != 0)
+{
+  <div class="fixed">
+            <div class="command">
+                <ul>
+                    <li><button id="btnDatPhong">Đặt phòng</button></li>
+                     <li><button id="btnCheckIn">Check in</button></li>
+                     <li><button id="btnCheckOut">Check out</button></li>
+                    @if (ViewBag.QuyenUser == 1)
+                    {
+                     <li><button id="btnXemLog">Admin</button></li>
+                     <li><button id="btnxemdanhsach">QL nhân viên</button></li>
+                    }
+                     <li><button id="btnthoatct"> @Html.ActionLink("Đăng Xuất","DangXuat","Home",null)</button></li>
+                </ul>
+            </div>
+            <div class="clearboth"></div>
+            <div class="filter">
+                
+                                  <div class="search">
+                                    @*  <input type="button" id="btnGoToday" value="Hôm nay" />*@
+                  Từ ngày <input type="text" class="datepicker" name="fromdate" /> 
+                  đến ngày <input type="text" class="datepicker" name="todate" />
+                  <button id="btnTimKiem">Tìm</button>
+              </div>
+            </div>
+               
+                </div>
+            <div class="clearboth"></div>
+            <div class="content" id="showBooking">
+                
+              @Html.Action("ShowBookingInfo")
+            </div>
+}

@@ -1,0 +1,56 @@
+﻿@model QLKhachSanWeb.Models.UserModel
+
+<h1>Cập nhật thông tin</h1>
+           
+             @using (Ajax.BeginForm(new AjaxOptions {HttpMethod="POST" }))
+             {
+                 <div class="pcontent">
+                <table class="form">
+                    <tr>
+                        <td class="lb">Họ và tên:</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.Name)
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                       <td class="lb">Tên đăng nhập:</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.UserName)
+                            @Html.ValidationMessageFor(x => x.UserName)
+                        </td>
+                    </tr>
+                        <tr>
+                       <td class="lb">Mật Khẩu :</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.Password)
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </td>
+                    </tr>
+                      <tr>
+                        <td class="lb">Loại nhân viên :</td>
+                        <td class="ct">
+                              @Html.DropDownListFor(x => x.PermissonId,new List<SelectListItem>(){ 
+                            new SelectListItem { Value = "1", Text = "Quản lý" }
+                            ,new SelectListItem { Value = "2", Text = "Nhân viên" }
+                            })
+                            @Html.ValidationMessageFor(x => x.PermissonId)
+                        </td>
+                    </tr>
+                      <tr>
+                        <td class="lb">Quyền nhân viên :</td>
+                        <td class="ct">
+                              @Html.DropDownListFor(x => x.IsActive,new List<SelectListItem>(){ 
+                            new SelectListItem { Value = "1", Text = "Hoạt động" }
+                            ,new SelectListItem { Value = "2", Text = "Không hoạt động" }
+                            })
+                            @Html.ValidationMessageFor(x => x.PermissonId)
+                        </td>
+                    </tr>
+                </table>
+                <div class="submit-form">
+                    <input type="submit" id="btnSave" value="Lưu"/>
+                    <input type="button" id="btnCancel" value="Bỏ qua"/>
+                </div>
+            </div>
+             }

@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Quản lý khách sạn</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="javascript/jquery.simplemodal.js"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#btnCheckIn").click(function () {
+                    $("#popup").modal();
+                })
+                $("#btnCancel").click(function () {
+                    $.modal.close();
+                })
+
+            })
+
+            function showToolTip(str) {
+
+                Tip(str, WIDTH, 300, ABOVE, true);
+            }
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="javascript/wz_tooltip.js"></script>
+        <div class="main">
+            <div class="fixed">
+            <div class="command">
+                <ul>
+                    <li><button id="btnDatPhong">Đặt phòng</button></li>
+                     <li><button id="btnCheckIn">Check in</button></li>
+                     <li><button id="btnCheckOut">Check out</button></li>
+                     <li><button id="btnXemLog">Xem log hệ thống</button></li>
+                </ul>
+            </div>
+            <div class="clearboth"></div>
+            <div class="filter">
+              <div class="search">
+                  Từ ngày <input type="datetime" name="fromdate" /> 
+                  đến ngày <input type="datetime" name="todate" />
+                  <button id="btnTimKiem">Tìm</button>
+              </div>
+            </div>
+               
+                </div>
+            <div class="clearboth"></div>
+            <div class="content">
+                
+                <table class="table-data">
+                     <tr style="position:fixed">
+                        <th>Phòng</th>
+                        <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th today>03/01/2014</th>
+                         <th >03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+                         <th>03/01/2014</th>
+
+                    </tr>
+                    <tr type="p1">
+                        <td onmouseover="showToolTip('Phong 1')" onmouseout="UnTip()">101</td>
+                        <td status="1"></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr  data-tooltip="Phong 101" type="p1">
+                        <td>101</td>
+                        <td status="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr  data-tooltip="Phong 101" type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td status="3"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p1">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p2">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p2">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+                    </tr>
+                     <tr type="p2">
+                        <td>101</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td today></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="popup">
+            <h1>Tiêu đề</h1>
+            <div class="pcontent">
+                <table class="form">
+                    <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                </table>
+                <div class="submit-form">
+                    <button id="btnSave">Lưu</button>
+                    <button id="btnCancel">Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+        <div id="mystickytooltip">
+           <div id="sticky1">
+               tooltip
+           </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+﻿@model QLKhachSanWeb.Models.BookingModel
+
+<h1>Đặt phòng</h1>
+           
+             @using (Html.BeginForm("BookRoom", "Booking", FormMethod.Post, new {id="frmBookRoom" }))
+             {
+                 <div class="pcontent">
+                <table class="form">
+                    <tr>
+                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.CustomerName):</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.BookingInfo.CustomerName)
+                            @Html.ValidationMessageFor(x => x.BookingInfo.CustomerName)
+                        </td>
+                    </tr>
+                       <tr>
+                       <td class="lb">@Html.LabelFor(x => x.BookingInfo.PhoneNumber):</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.BookingInfo.PhoneNumber)
+                            @Html.ValidationMessageFor(x => x.BookingInfo.PhoneNumber)
+                        </td>
+                    </tr>
+                        <tr>
+                       <td class="lb">@Html.LabelFor(x => x.BookingInfo.CustomerCardNo):</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.BookingInfo.CustomerCardNo)
+                            @Html.ValidationMessageFor(x => x.BookingInfo.CustomerCardNo)
+                        </td>
+                    </tr>
+                       <tr>
+                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.RoomId):</td>
+                        <td class="ct">
+                            @Html.DropDownListFor(x => x.BookingInfo.RoomId, Model.Room.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }))
+                            @Html.ValidationMessageFor(x => x.BookingInfo.RoomId)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.StatusId):</td>
+                        <td class="ct">
+                            @Html.DropDownListFor(x => x.BookingInfo.StatusId, new List<SelectListItem>(){ 
+                            new SelectListItem { Value = "1", Text = "Đặt phòng không đảm bảo" }
+                            ,new SelectListItem { Value = "1", Text = "Đặt phòng đảm bảo" }
+                            })
+                            @Html.ValidationMessageFor(x => x.BookingInfo.RoomId)
+                        </td>
+                    </tr>
+                     <tr>
+                       <td class="lb">@Html.LabelFor(x => x.BookingInfo.CheckingDate):</td>
+                        <td class="ct">
+                            @Html.TextBoxFor(x => x.BookingInfo.CheckingDate, new { @class = "datepicker",Value="" })
+                            @Html.ValidationMessageFor(x => x.BookingInfo.CheckingDate)
+                        </td>
+                    </tr>
+                     <tr>
+                       <td class="lb">@Html.LabelFor(x => x.BookingInfo.CheckOutDate):</td>
+                        <td class="ct">
+                            @Html.TextBoxFor(x => x.BookingInfo.CheckOutDate, new { @class = "datepicker",Value="" })
+                            @Html.ValidationMessageFor(x => x.BookingInfo.CheckOutDate)
+                        </td>
+                    </tr>
+                       <tr>
+                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.CustomerInfoOther):</td>
+                        <td class="ct">
+                            @Html.EditorFor(x => x.BookingInfo.CustomerInfoOther)
+                            @Html.ValidationMessageFor(x => x.BookingInfo.CustomerInfoOther)
+                        </td>
+                    </tr>
+                </table>
+                <div class="submit-form">
+                    <input type="submit" id="btnSave" value="Lưu"/>
+                    <input type="button" id="btnCancel" value="Bỏ qua"/>
+                </div>
+            </div>
+             }
