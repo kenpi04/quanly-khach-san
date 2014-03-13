@@ -65,25 +65,31 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult AddUsers(UserModel model)
         {
-
-            User NewUser = new User();
-            NewUser.Name = model.Name;
-            NewUser.UserName = model.UserName;
-            NewUser.Password = model.Password;
-            NewUser.IsActive = true;
-            NewUser.PermissonId = Convert.ToInt16(model.PermissonId);
-            NewUser.LastUpdateDate = DateTime.Now;
-            NewUser.CreateDate = DateTime.Now;
-
-            int kq = _service.InsertUser(NewUser);
-            if (kq == 1)
+            try
             {
-                User team = KTQUyen();
-                string tile = team.UserName + " đã thêm tài khoản " + model.UserName + " vào hệ thống";
-                _service.WriteLogAction(tile, team.Id);
-                return RedirectToAction("ListUsers", "Admin");
+                User NewUser = new User();
+                NewUser.Name = model.Name;
+                NewUser.UserName = model.UserName;
+                NewUser.Password = model.Password;
+                NewUser.IsActive = true;
+                NewUser.PermissonId = Convert.ToInt16(model.PermissonId);
+                NewUser.LastUpdateDate = DateTime.Now;
+                NewUser.CreateDate = DateTime.Now;
+
+                int kq = _service.InsertUser(NewUser);
+                if (kq == 1)
+                {
+                    User team = KTQUyen();
+                    string tile = team.UserName + " đã thêm tài khoản " + model.UserName + " vào hệ thống";
+                    _service.WriteLogAction(tile, team.Id);
+                    return RedirectToAction("ListUsers", "Admin");
+                }
+                return View();
             }
-            return View();
+            catch (Exception e)
+            {
+                return View();
+            }
         }
 
         public ActionResult ListUsers()
@@ -150,28 +156,35 @@ namespace QLKhachSanWeb.Controllers
 
         public ActionResult UpdateUser(UserModel model)
         {
-            User us = new User();
-            us.Id = model.Id;
-            us.Name = model.Name;
-            us.UserName = model.UserName;
-            us.Password = _service.GetUsersByID(us.Id).Password;
-            us.PermissonId = Convert.ToInt16(model.PermissonId);
-            us.CreateDate = _service.GetUsersByID(us.Id).CreateDate;
-            //model.CreateDate;
-            us.LastUpdateDate = DateTime.Now;
-            if (model.IsActive == 1)
-                us.IsActive = true;
-            else
-                us.IsActive = false;
-            int kq = _service.UpdateUser(us);
-            if (kq == 1)
+            try
             {
-                User team = KTQUyen();
-                string tile = team.UserName + " đã cập nhật tài khoản " + model.UserName;
-                _service.WriteLogAction(tile, team.Id);
-                return RedirectToAction("ListUsers", "Admin");
+                User us = new User();
+                us.Id = model.Id;
+                us.Name = model.Name;
+                us.UserName = model.UserName;
+                us.Password = _service.GetUsersByID(us.Id).Password;
+                us.PermissonId = Convert.ToInt16(model.PermissonId);
+                us.CreateDate = _service.GetUsersByID(us.Id).CreateDate;
+                //model.CreateDate;
+                us.LastUpdateDate = DateTime.Now;
+                if (model.IsActive == 1)
+                    us.IsActive = true;
+                else
+                    us.IsActive = false;
+                int kq = _service.UpdateUser(us);
+                if (kq == 1)
+                {
+                    User team = KTQUyen();
+                    string tile = team.UserName + " đã cập nhật tài khoản " + model.UserName;
+                    _service.WriteLogAction(tile, team.Id);
+                    return RedirectToAction("ListUsers", "Admin");
+                }
+                return View();
             }
-            return View();
+            catch (Exception e)
+            {
+                return View();
+            }
         }
 
 
@@ -279,24 +292,31 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult AddNewSevice(ServiceModel model)
         {
-            Service team = new Service();
-            team.Name = model.Name;
-            team.Price = decimal.Parse(model.Price);
-            team.Description = model.Description;
-            team.Deleted = false;
-            team.IsActive = true;
-            team.IsRoom = false;
-            team.ServiceTypeId = 0;
-            int kq = _service.InsertService(team);
-            if (kq == 1)
+            try
             {
-                User team1 = KTQUyen();
-                string tile = team1.UserName + " đã thêm dịch vụ " + model.Name;
-                _service.WriteLogAction(tile, team1.Id);
-                return RedirectToAction("ListService", "Admin");
+                Service team = new Service();
+                team.Name = model.Name;
+                team.Price = decimal.Parse(model.Price);
+                team.Description = model.Description;
+                team.Deleted = false;
+                team.IsActive = true;
+                team.IsRoom = false;
+                team.ServiceTypeId = 0;
+                int kq = _service.InsertService(team);
+                if (kq == 1)
+                {
+                    User team1 = KTQUyen();
+                    string tile = team1.UserName + " đã thêm dịch vụ " + model.Name;
+                    _service.WriteLogAction(tile, team1.Id);
+                    return RedirectToAction("ListService", "Admin");
+                }
+                else
+                    return View();
             }
-            else
+            catch (Exception e)
+            {
                 return View();
+            }
         }
 
         public ActionResult DeleteService(int Id)
@@ -338,28 +358,35 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult UpdateService(ServiceModel model)
         {
-            Service kq = new Service();
-            kq.Id = model.Id;
-            kq.Name = model.Name;
-            kq.Price = decimal.Parse(model.Price);
-            kq.Description = model.Description;
-            if (model.IsActive == 1)
-                kq.IsActive = true;
-            else
-                kq.IsActive = false;
-            kq.ServiceTypeId = 0;
-            kq.Deleted = false;
-            kq.IsRoom = false;
-            int gt = _service.UpdateService(kq);
-            if (gt == 1)
+            try
             {
-                User team1 = KTQUyen();
-                string tile = team1.UserName + " đã cập nhật dịch vụ " + model.Name;
-                _service.WriteLogAction(tile, team1.Id);
-                return RedirectToAction("ListService", "Admin");
+                Service kq = new Service();
+                kq.Id = model.Id;
+                kq.Name = model.Name;
+                kq.Price = decimal.Parse(model.Price);
+                kq.Description = model.Description;
+                if (model.IsActive == 1)
+                    kq.IsActive = true;
+                else
+                    kq.IsActive = false;
+                kq.ServiceTypeId = 0;
+                kq.Deleted = false;
+                kq.IsRoom = false;
+                int gt = _service.UpdateService(kq);
+                if (gt == 1)
+                {
+                    User team1 = KTQUyen();
+                    string tile = team1.UserName + " đã cập nhật dịch vụ " + model.Name;
+                    _service.WriteLogAction(tile, team1.Id);
+                    return RedirectToAction("ListService", "Admin");
+                }
+                else
+                    return View();
             }
-            else
+            catch (Exception e) 
+            {
                 return View();
+            }
         }
         #endregion
 
@@ -440,25 +467,32 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult AddNewSeviceRoom(ServiceModel model)
         {
-            Service team = new Service();
-            team.Name = model.Name;
-            team.Price = decimal.Parse(model.Price);
-            team.Description = model.Description;
-            team.Deleted = false;
-            team.IsActive = true;
-            team.IsRoom = true;
-            team.FloorNumber = model.FloorNumber;
-            team.ServiceTypeId = model.ServiceTypeId;
-            int kq = _service.InsertService(team);
-            if (kq == 1)
+            try
             {
-                User team1 = KTQUyen();
-                string tile = team1.UserName + " đã thêm phòng " + model.Name;
-                _service.WriteLogAction(tile, team1.Id);
-                return RedirectToAction("ListServiceRoom", "Admin");
+                Service team = new Service();
+                team.Name = model.Name;
+                team.Price = decimal.Parse(model.Price);
+                team.Description = model.Description;
+                team.Deleted = false;
+                team.IsActive = true;
+                team.IsRoom = true;
+                team.FloorNumber = model.FloorNumber;
+                team.ServiceTypeId = model.ServiceTypeId;
+                int kq = _service.InsertService(team);
+                if (kq == 1)
+                {
+                    User team1 = KTQUyen();
+                    string tile = team1.UserName + " đã thêm phòng " + model.Name;
+                    _service.WriteLogAction(tile, team1.Id);
+                    return RedirectToAction("ListServiceRoom", "Admin");
+                }
+                else
+                    return View();
             }
-            else
+            catch (Exception e)
+            {
                 return View();
+            }
         }
 
 
@@ -502,29 +536,36 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult UpdateServiceRoom(ServiceModel model)
         {
-            Service kq = new Service();
-            kq.Id = model.Id;
-            kq.Name = model.Name;
-            kq.FloorNumber = model.FloorNumber;
-            kq.ServiceTypeId = model.ServiceTypeId;
-            kq.Price = decimal.Parse(model.Price);
-            kq.Description = model.Description;
-            if (model.IsActive == 1)
-                kq.IsActive = true;
-            else
-                kq.IsActive = false;
-            kq.Deleted = kq.Deleted;
-            kq.IsRoom = true;
-            int gt = _service.UpdateService(kq);
-            if (gt == 1)
+            try
             {
-                User team1 = KTQUyen();
-                string tile = team1.UserName + " đã cập nhật phòng " + model.Name;
-                _service.WriteLogAction(tile, team1.Id);
-                return RedirectToAction("ListServiceRoom", "Admin");
+                Service kq = new Service();
+                kq.Id = model.Id;
+                kq.Name = model.Name;
+                kq.FloorNumber = model.FloorNumber;
+                kq.ServiceTypeId = model.ServiceTypeId;
+                kq.Price = decimal.Parse(model.Price);
+                kq.Description = model.Description;
+                if (model.IsActive == 1)
+                    kq.IsActive = true;
+                else
+                    kq.IsActive = false;
+                kq.Deleted = kq.Deleted;
+                kq.IsRoom = true;
+                int gt = _service.UpdateService(kq);
+                if (gt == 1)
+                {
+                    User team1 = KTQUyen();
+                    string tile = team1.UserName + " đã cập nhật phòng " + model.Name;
+                    _service.WriteLogAction(tile, team1.Id);
+                    return RedirectToAction("ListServiceRoom", "Admin");
+                }
+                else
+                    return View();
             }
-            else
+            catch (Exception e) 
+            { 
                 return View();
+            }
         }
 
 
@@ -547,18 +588,24 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult AddNewSevicetypeRoom(ServiceTypeModel model)
         {
-            ServiceType team = new ServiceType();
-            team.Name = model.Name;
-            int kq = _service.InsertSeviceType(team);
-            if (kq == 1)
+            try
             {
-                User team1 = KTQUyen();
-                string tile = team1.UserName + " đã thêm loại phòng " + model.Name;
-                _service.WriteLogAction(tile, team1.Id);
-                return RedirectToAction("Index", "Admin");
+                ServiceType team = new ServiceType();
+                team.Name = model.Name;
+                int kq = _service.InsertSeviceType(team);
+                if (kq == 1)
+                {
+                    User team1 = KTQUyen();
+                    string tile = team1.UserName + " đã thêm loại phòng " + model.Name;
+                    _service.WriteLogAction(tile, team1.Id);
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                    return View();
             }
-            else
+            catch (Exception e) {
                 return View();
+            }
 
         }
 
