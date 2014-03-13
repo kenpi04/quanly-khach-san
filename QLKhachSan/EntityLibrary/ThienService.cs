@@ -75,6 +75,7 @@ namespace EntityLibrary
 
 
        #region BookingInfor
+      
        public IList<BookingInfo> GetListBookingInfoByRoomId(int roomId)
        { 
         var q=from b in db.BookingInfoes 
@@ -357,6 +358,16 @@ namespace EntityLibrary
 
 
 
-      
+
+
+       public object GetListUsers()
+       {
+           throw new NotImplementedException();
+       }
+
+       public User GetUsersByID(int id)
+       {
+           throw new NotImplementedException();
+       }
     }
 }
