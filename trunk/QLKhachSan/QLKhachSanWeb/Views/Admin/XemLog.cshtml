@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "XemLog";
+    Layout = "~/Views/Shared/_AdminRoot.cshtml";
+}
+@model List<QLKhachSanWeb.Models.LogModel>
+<table>
+    <tr>
+        <td>Mã nhật kí</td>
+        <td>Ngày thực hiện</td>
+        <td>Hành động</td>
+        <td>Người thực hiện</td>
+    </tr>
+     @foreach (QLKhachSanWeb.Models.LogModel team in Model)
+     {
+         <tr>
+             <td>@team.id</td>
+             <td>@team.CreateDate</td>
+             <td>@team.ActionName</td>
+             <td>@team.UserName</td>
+         </tr>
+     }
+</table>

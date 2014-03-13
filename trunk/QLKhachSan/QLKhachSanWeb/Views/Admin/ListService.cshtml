@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminRoot.cshtml";
+}
+
+@model List<QLKhachSanWeb.Models.ServiceModel>
+
+<h1>Danh sách dịch vụ của khách sạn</h1>
+  <div>
+    <table>
+                    <tr>
+                        <td >Tên dịch vụ</td>
+                        <td>Giá dịch vụ</td>
+                        <td>Mô tả</td>
+                        <td>Tình trạng</td>
+                        <td>  </td>
+                         <td>  </td>
+                    </tr>
+                    @foreach (QLKhachSanWeb.Models.ServiceModel team in Model)
+                    {
+                    <tr>
+                        <td >@team.Name</td>
+                        <td>@team.Price</td>
+                        <td>@team.Description</td>
+                        @if (@team.IsActive == 1)
+                        {
+                            <td>Đang hoạt động</td>
+                        }
+                        else
+                        {
+                            <td>Không hoạt động</td>
+                        }
+                        <td>
+                           @Html.ActionLink("Cập nhật","UpdateService","Admin",new { team.Id },null)
+                        </td>
+                         <td>
+                           @Html.ActionLink("Xoá","DeleteService","Admin",new { team.Id },null)
+                        </td>
+                    </tr>
+                    }
+                </table>
+  </div>

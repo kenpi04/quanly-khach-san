@@ -96,10 +96,7 @@ namespace QLKhachSanWeb.Controllers
             _service.UpdateBookingInfo(entity);
             return 1;
         }
-        public ActionResult CheckIn()
-        { 
-            
-        }
+       
         
 
     }

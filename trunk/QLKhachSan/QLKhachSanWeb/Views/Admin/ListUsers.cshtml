@@ -1,31 +1,36 @@
-﻿@model List<QLKhachSanWeb.Models.UserModel>
+﻿@{
+    Layout = "~/Views/Shared/_AdminRoot.cshtml";
+}
+
+@model List<QLKhachSanWeb.Models.UserModel>
 
 <h1>Danh sách nhân viên</h1>
-           
-             @using (Ajax.BeginForm(new AjaxOptions {HttpMethod="POST" }))
-             {
-                 <div class="pcontent">
-                <table class="form1">
+  <div>
+    <table>
                     <tr>
-                        <td class="lb">Họ và tên</td>
-                        <td class="lb">Tên đăng nhập</td>
-                        <td class="lb">Mật Khẩu</td>
-                        <td class="lb">  </td>
+                        <td >Họ và tên</td>
+                        <td>Tên đăng nhập</td>
+                         <td>Tên đăng nhập</td>
+                        <td>Loại nhân viên</td>
+                        <td>  </td>
                     </tr>
                     @foreach(QLKhachSanWeb.Models.UserModel team in Model)
                     {
                     <tr>
-                        <td class="lb">@team.Name</td>
-                        <td class="lb">@team.UserName</td>
-                        <td class="lb">@team.Password</td>
-                        <td class="lb">
+                        <td >@team.Name</td>
+                        <td>@team.UserName</td>
+                            @if (team.PermissonId==1)
+                            {
+                               <td>Quản lý</td>
+                            }
+                            else
+                            {
+                                 <td>Nhân viên</td>
+                            }
+                        <td>
                            @Html.ActionLink("Cập nhật","UpdateUser","Admin",new { team.Id },null)
                         </td>
                     </tr>
                     }
                 </table>
-                <div class="submit-form">
-                    <input type="button" id="btnCancel" value="Thoát"/>
-                </div>
-            </div>
-             }
+  </div>

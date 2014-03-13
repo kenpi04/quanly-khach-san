@@ -12,10 +12,10 @@
                      <li><button id="btnCheckOut">Check out</button></li>
                     @if (ViewBag.QuyenUser == 1)
                     {
-                     <li><button id="btnXemLog">Admin</button></li>
-                     <li><button id="btnxemdanhsach">QL nhân viên</button></li>
+                        <li><a href="~/Admin/Index"><button id="btnAdmin">Admin</button></a></li>
                     }
-                     <li><button id="btnthoatct"> @Html.ActionLink("Đăng Xuất","DangXuat","Home",null)</button></li>
+                     <li><a href="~/Home/DangXuat"><button id="btnthoatct">Đăng xuất</button></a></li>
+                         
                 </ul>
             </div>
             <div class="clearboth"></div>
