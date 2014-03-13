@@ -1,38 +1,35 @@
-﻿@model QLKhachSanWeb.Models.UserModel
-@{
+﻿@{
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
-<h1>Cập nhật thông tin</h1>
+@model QLKhachSanWeb.Models.ServiceModel
+<h1>Cập dịch vụ khách sạn</h1>
        @using (Html.BeginForm())
         {
                <div>
-                <table class="form">
+                <table >
                     <tr>
-                        <td class="lb">Họ và tên:</td>
-                        <td class="ct">
+                        <td>Tên dịch vụ:</td>
+                        <td>
                             @Html.EditorFor(x => x.Name)
                             @Html.ValidationMessageFor(x => x.Name)
                         </td>
                     </tr>
                     <tr>
-                       <td class="lb">Tên đăng nhập:</td>
-                        <td class="ct">
-                            @Html.EditorFor(x => x.UserName)
-                            @Html.ValidationMessageFor(x => x.UserName)
+                       <td>Giá :</td>
+                        <td >
+                            @Html.EditorFor(x => x.Price)
+                            @Html.ValidationMessageFor(x => x.Price)
                         </td>
                     </tr> 
                       <tr>
-                        <td class="lb">Loại nhân viên :</td>
-                        <td class="ct">
-                              @Html.DropDownListFor(x => x.PermissonId,new List<SelectListItem>(){ 
-                            new SelectListItem { Value = "1", Text = "Quản lý" }
-                            ,new SelectListItem { Value = "2", Text = "Nhân viên" }
-                            })
-                            @Html.ValidationMessageFor(x => x.PermissonId)
+                       <td>Mô tả :</td>
+                        <td >
+                            @Html.EditorFor(x => x.Description)
+                            @Html.ValidationMessageFor(x => x.Description)
                         </td>
-                    </tr>
+                    </tr> 
                       <tr>
-                        <td class="lb">Quyền nhân viên :</td>
+                        <td class="lb">Tình trạng :</td>
                         <td class="ct">
                               @Html.DropDownListFor(x => x.IsActive,new List<SelectListItem>(){ 
                             new SelectListItem { Value = "1", Text = "Hoạt động" }

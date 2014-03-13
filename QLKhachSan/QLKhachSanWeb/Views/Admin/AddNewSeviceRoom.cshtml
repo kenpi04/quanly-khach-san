@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminRoot.cshtml";
+}
+@model QLKhachSanWeb.Models.ServiceModel
+<h1>Thêm phòng mới</h1>
+       @using (Html.BeginForm())
+       {
+           <div>
+               <table>
+                   <tr>
+                       <td>Tên phòng : </td>
+                        <td>
+                            @Html.EditorFor(x => x.Name)
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </td>
+                   </tr>
+                    <tr>
+                       <td>Tầng : </td>
+                        <td>
+                            @Html.EditorFor(x => x.FloorNumber)
+                            @Html.ValidationMessageFor(x => x.FloorNumber)
+                        </td>
+                   </tr>
+                   <tr>
+                       <td>Loại phòng : </td>
+                        <td>
+                           @Html.DropDownListFor(p=>p.ServiceTypeId, (IEnumerable<SelectListItem>)ViewBag.ListTypeService, "---Chọn ---")
+                        </td>
+                   </tr>
+                    <tr>
+                       <td>Giá tiền : </td>
+                        <td>
+                            @Html.EditorFor(x => x.Price)
+                            @Html.ValidationMessageFor(x => x.Price)
+                        </td>
+                   </tr>
+                    <tr>
+                       <td>Mô tả : </td>
+                        <td>
+                            @Html.EditorFor(x => x.Description)
+                            @Html.ValidationMessageFor(x => x.Description)
+                        </td>
+                   </tr>
+               </table>
+                <div class="submit-form">
+                    <input type="submit" id="btnSave" value="Thêm mới"/>
+                </div>
+           </div>
+       }

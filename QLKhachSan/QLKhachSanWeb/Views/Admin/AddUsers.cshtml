@@ -1,10 +1,13 @@
-﻿@model QLKhachSanWeb.Models.UserModel
-
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminRoot.cshtml";
+}
+@model QLKhachSanWeb.Models.UserModel
 <h1>Thêm tài khoản mới</h1>
-           
-             @using (Ajax.BeginForm(new AjaxOptions {HttpMethod="POST" }))
-             {
+        @using (Html.BeginForm())
+        {
                  <div class="pcontent">
+       
                 <table class="form">
                     <tr>
                         <td class="lb">Họ và tên:</td>
@@ -39,8 +42,7 @@
                     </tr>
                 </table>
                 <div class="submit-form">
-                    <input type="submit" id="btnSave" value="Lưu"/>
-                    <input type="button" id="btnCancel" value="Bỏ qua"/>
+                    <input type="submit" id="btnSave" value="Thêm mới"/>
                 </div>
             </div>
-             }
+        }

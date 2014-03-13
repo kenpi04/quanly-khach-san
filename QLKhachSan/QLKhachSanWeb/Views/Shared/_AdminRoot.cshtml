@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quản lý khách sạn</title>
+        <link href="~/css/AdminStyles.css" rel="stylesheet" />
+    </head>
+<body>
+<ul class="menu">
+
+    <li><a href="~/Home/Index">Trang chủ</a></li>
+    <li><a href="#">Quản lý phòng</a>
+     <ul>
+            <li><a href="~/Admin/ListServiceRoom" class="cap1">Danh sách</a></li>
+            <li><a href="~/Admin/AddNewSeviceRoom" class="cap2">Thêm phòng</a></li>
+            <li><a href="~/Admin/AddNewSevicetypeRoom" class="cap3">Loại phòng</a></li>
+     </ul>
+     </li>
+    <li><a href="#">Quản lý nhân viên</a>
+ 
+        <ul>
+            <li><a href="~/Admin/ListUsers" class="cap1">Danh sách</a></li>
+            <li><a href="~/Admin/AddUsers" class="cap2">Thêm mới</a></li>
+        </ul>
+ 
+    </li>
+    <li><a href="#">Quản lý dịch vụ</a>
+         <ul>
+            <li><a href="~/Admin/ListService" class="cap1">Danh sách</a></li>
+            <li><a href="~/Admin/AddNewSevice" class="cap2">Thêm mới</a></li>
+     </ul>
+    </li>
+    <li><a href="~/Admin/XemLog">Xem log hệ thống</a></li>
+     <li><a href="~/Home/DangXuat">Đăng xuất</a></li>
+ 
+</ul>
+</body>
+</html>
+ @RenderBody()
