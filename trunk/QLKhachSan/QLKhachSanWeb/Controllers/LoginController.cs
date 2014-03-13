@@ -21,13 +21,15 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
-            ThienService SV = new ThienService();
+            ThienGetService123 SV = new ThienGetService123();
             int kq = SV.GetUser(model.UserName, model.Password);
             if (kq == 1)
             {
                 ViewBag.trangthai = "Yes";
                 User team = SV.GetUsers(model.UserName, model.Password);
                 HttpContext.Session["SessionUser"] = team;
+               // string tile = team.UserName + " đã đăng nhập vào hệ thống";
+                //SV.WriteLogAction(tile, team.Id);
                 return RedirectToAction("Index", "Home");
             }
             else
