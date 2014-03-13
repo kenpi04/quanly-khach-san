@@ -6,24 +6,24 @@
        @using (Html.BeginForm())
         {
                <div>
-                <table class="form">
+                <table>
                     <tr>
-                        <td class="lb">Họ và tên:</td>
-                        <td class="ct">
+                        <td >Họ và tên:</td>
+                        <td>
                             @Html.EditorFor(x => x.Name)
                             @Html.ValidationMessageFor(x => x.Name)
                         </td>
                     </tr>
                     <tr>
-                       <td class="lb">Tên đăng nhập:</td>
-                        <td class="ct">
+                       <td>Tên đăng nhập:</td>
+                        <td >
                             @Html.EditorFor(x => x.UserName)
                             @Html.ValidationMessageFor(x => x.UserName)
                         </td>
                     </tr> 
                       <tr>
-                        <td class="lb">Loại nhân viên :</td>
-                        <td class="ct">
+                        <td>Loại nhân viên :</td>
+                        <td>
                               @Html.DropDownListFor(x => x.PermissonId,new List<SelectListItem>(){ 
                             new SelectListItem { Value = "1", Text = "Quản lý" }
                             ,new SelectListItem { Value = "2", Text = "Nhân viên" }
@@ -32,8 +32,8 @@
                         </td>
                     </tr>
                       <tr>
-                        <td class="lb">Quyền nhân viên :</td>
-                        <td class="ct">
+                        <td>Quyền nhân viên :</td>
+                        <td >
                               @Html.DropDownListFor(x => x.IsActive,new List<SelectListItem>(){ 
                             new SelectListItem { Value = "1", Text = "Hoạt động" }
                             ,new SelectListItem { Value = "2", Text = "Không hoạt động" }
@@ -42,7 +42,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="submit-form">
+                <div>
                     <input type="submit" id="btnSave" value="Cập nhật"/>
                 </div>
             </div>
