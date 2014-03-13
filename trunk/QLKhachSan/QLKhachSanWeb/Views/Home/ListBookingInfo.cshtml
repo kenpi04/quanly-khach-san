@@ -1,0 +1,52 @@
+﻿@model QLKhachSanWeb.Models.ListBookingModel
+<table class="table-data">
+    @{
+        double dateDiff = (Model.DateEnd - Model.DateStart).TotalDays;
+        }
+    @for (int i = -1; i < Model.Rooms.Count; i++)
+    {
+       
+      
+       int j = 0;
+        <tr @(i==-1?"style=position:fixed":"")>
+        @while(j<dateDiff) 
+        {
+            
+            var now=Model.DateStart.AddDays(j);
+            if(i==-1)
+            {
+                if (j == 0)
+                {
+                    <th>Phòng</th>
+                }
+                else
+                {
+                   
+                    <th @(now.Day==DateTime.Now.Day?"today":"")>@now.ToString("dd/MM")</th>
+                }
+            }
+            else
+            {
+                var room = Model.Rooms[i];
+                if (j == 0)
+                {
+                    <td class="room" id="@room.Id">@room.Name</td>
+                }
+                else
+                {
+                    var check =room.BookingInfo.Where(x => x.StartDate.Day <= now.Day && x.EndDate.Day >= now.Day).FirstOrDefault();
+                    <td @(now.Day==DateTime.Now.Day?"today":"") @(check!=null?"id="+check.Id+" status="+check.TypeId:"")>
+                        @if(check!=null)
+                        {
+                            @check.CustomerName
+                        }
+                    </td>
+                }
+            }
+            j++;
+           
+           
+        }
+     </tr>
+    }
+    </table>

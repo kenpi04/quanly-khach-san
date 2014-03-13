@@ -1,0 +1,58 @@
+﻿@{
+   
+    
+    }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Quản lý khách sạn</title>
+     <script type="text/javascript" src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.simplemodal.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+</head>
+<body>
+     <script src="~/Scripts/wz_tooltip.js"></script>
+    <div class="main">
+        @RenderBody()
+    </div>
+    <div id="popup">
+            <h1>Tiêu đề</h1>
+            <div class="pcontent">
+                <table class="form">
+                    <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                       <tr>
+                        <td class="lb">Tên:</td>
+                        <td class="ct"><input  type="text" name="ten"/></td>
+                    </tr>
+                </table>
+                <div class="submit-form">
+                    <button id="btnSave">Lưu</button>
+                    <button id="btnCancel">Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

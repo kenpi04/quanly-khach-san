@@ -1,0 +1,83 @@
+﻿
+
+@model QLKhachSanWeb.Models.LoginModel
+
+<html>
+<head>
+<style>
+
+.label{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:11px;
+    color:#0066FF;
+}
+.tableBorder{
+    border:solid 1px #0066FF;
+    margin-top:100px;
+}
+.message{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    color:#0066FF;
+    margin-left:40px;
+}
+.messageFalie{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    color:red;
+     margin-left:30px;
+}
+
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Login to Website</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table cellpadding="2px" cellspacing="1px" bgcolor="#F4F5F7" width="400px" class="tableBorder" align="center">
+    <tr>
+        <td colspan="2" bgcolor="#0066FF">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="label">&nbsp;</td>
+    </tr>
+    
+    <tr>
+        <td align="center" colspan="2">
+            <span class="message">Đăng nhập để vào Website</span>
+        </td>
+    </tr>  
+     <tr>
+        <td align="center" colspan="2">
+            @if (ViewBag.trangthai == "No")
+                  {
+                        <span class="messageFalie">Tên đăng nhập hoặc mật khẩu không đúng !</span>
+                  }
+        </td>
+    </tr>                       
+     
+      @using (Html.BeginForm())
+      {
+    <tr>
+        <td class="label" align="right" width="40%">Tên User:</td>
+        <td align="left" width="60%"> @Html.TextBoxFor(m => m.UserName)</td>
+    </tr>
+    <tr>
+        <td class="label" align="right">Mật Khẩu:</td>
+        <td align="left">@Html.PasswordFor(m => m.Password)</td>
+    </tr>
+          
+    <tr>
+        <td class="label" align="right">&nbsp;</td>
+        <td align="left"><input type="submit" value="Đăng nhập" /></td>
+    </tr> 
+      }                  
+    <tr>
+        <td colspan="2" class="label">&nbsp;</td>
+    </tr>                   
+</table>
+</body>
+</html>

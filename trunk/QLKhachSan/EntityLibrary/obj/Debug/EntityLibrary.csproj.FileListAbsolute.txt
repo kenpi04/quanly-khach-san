@@ -1,0 +1,6 @@
+E:\Du an\qlks\QLKhachSan\EntityLibrary\bin\Debug\EntityLibrary.dll.config
+E:\Du an\qlks\QLKhachSan\EntityLibrary\bin\Debug\EntityLibrary.dll
+E:\Du an\qlks\QLKhachSan\EntityLibrary\bin\Debug\EntityLibrary.pdb
+E:\Du an\qlks\QLKhachSan\EntityLibrary\obj\Debug\EntityLibrary.dll
+E:\Du an\qlks\QLKhachSan\EntityLibrary\obj\Debug\EntityLibrary.pdb
+E:\Du an\qlks\QLKhachSan\EntityLibrary\bin\Debug\EntityFramework.dll

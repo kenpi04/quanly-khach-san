@@ -1,0 +1,108 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+body { line-height: 1; }
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display: block; }
+nav ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+a { margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+/* change colours to suit your needs */
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+/* change colours to suit your needs */
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+del { text-decoration: line-through; }
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+table { border-collapse: collapse; border-spacing: 0; }
+/* change border colour to suit your needs */
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #cccccc; margin: 1em 0; padding: 0; }
+input, select { vertical-align: middle; }
+body{background-color:#F3F3F3;font-family:Arial,Verdana,sans-serif;font-size:12px;color:#373737;margin:0 auto}
+input[type=text], input[type=password],input[type=datetime], textarea {padding:2px 3px;font-weight:bold }
+table th {font-weight:bold;text-align:center }
+ul {list-style:none }
+.main {margin:10px auto; }
+.content {margin-top: 86px; }
+.clearboth {clear:both }
+.command {width:940px;margin:0 auto }
+.command li{width:25%;float:left;text-align:center }
+.search {float:right;margin-right:6px }
+.table-data {border:solid 2px  #cccccc ;width:100%;font-size:16px}
+.table-data td {text-align:center }
+.table-data tr:first-child { position: fixed;
+top: 58px;
+background: #ddd;
+border-bottom: solid 2px #d41212;
+width: 100%;}
+.table-data th,.table-data td {border:solid 1px #cccccc;padding:5px 0;width:93px }
+.table-data tr[type=p1] {background:#cbd2fc }
+.table-data tr[type=p2] {background:#ebbaba }
+.table-data tr[type=p3] {background:#c8f5ce }
+.table-data tr td:first-child {font-weight:bold }
+.table-data th[today],.table-data td[today] {background:#FFD8D8;border-bottom:#FFD8D8 }
+.table-data td[status='1'] {background:green }
+.table-data td[status='2'] {background:red }
+.table-data td[status='3'] {background:blue }
+
+.fixed { position: fixed; /* height: 56px; */ top: 0; background: #ddd; width: 100%;border-bottom:solid 2px #FF6B6B }
+button, input[type=button], input[type=submit] {background:#ff6a00;padding:5px;color:#fff;border:none;cursor:pointer}
+.table-data tr:first-child th {
+width: 98px;
+}
+#simplemodal-overlay{background-color:#000}
+#simplemodal-container{}
+#popup {width:500px;background:#fff;display:none;font-size:14px;border-radius: 10px; }
+#popup h1 {font-size: 17px;
+color: #d41212;
+text-align: center;
+background: #c1c1c1;
+padding: 5px 0px; }
+#popup .pcontent {padding:10px }
+#popup table.form {width: 100%;
+margin: 0 auto;line-height: 36px;}
+#popup table.form td.lb {text-align:right;font-weight:bold}
+#popup table.form td.ct {padding-left:20px }
+.submit-form {text-align:center }
+.stickytooltip{
+box-shadow: 5px 5px 8px #818181; /*shadow for CSS3 capable browsers.*/
+-webkit-box-shadow: 5px 5px 8px #818181;
+-moz-box-shadow: 5px 5px 8px #818181;
+display:none;
+position:absolute;
+display:none;
+border:5px solid black; /*Border around tooltip*/
+background:white;
+z-index:3000;
+}
+
+
+.stickytooltip .stickystatus{ /*Style for footer bar within tooltip*/
+background:black;
+color:white;
+padding-top:5px;
+text-align:center;
+font:bold 11px Arial;
+}
+.field-validation-error {color:red }
+td[status][id] {color:#fff;font-weight:bold }
+.tooltip {background:#fff;padding:5px;line-height:20px;font-size:12px;border:solid 1px #cccccc;box-shadow:2px 2px 3px #ccc }
+
+
+
+#popup table.form1 {width: 100%;
+margin: 0 auto;line-height: 36px;}
+#popup table.form1 td.lb {text-align:center;font-weight:bold}
+#popup table.form1 td.ct {padding-left:20px;text-align:center }
+.submit-form1 {text-align:center }
+

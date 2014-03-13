@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLKhachSanModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="QLKhachSanModelStoreContainer">
+          <EntitySet Name="BookingInfo" EntityType="QLKhachSanModel.Store.BookingInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookingInfoDetail" EntityType="QLKhachSanModel.Store.BookingInfoDetail" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Log" EntityType="QLKhachSanModel.Store.Log" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Service" EntityType="QLKhachSanModel.Store.Service" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ServiceType" EntityType="QLKhachSanModel.Store.ServiceType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="QLKhachSanModel.Store.User" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="BookingInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CustomerCardNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CustomerInfoOther" Type="nvarchar" MaxLength="200" />
+          <Property Name="BookingDate" Type="datetime" />
+          <Property Name="CheckingDate" Type="datetime" />
+          <Property Name="CheckOutDate" Type="datetime" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="HasChangeRoom" Type="bit" Nullable="false" />
+          <Property Name="FromBookingInfoId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="smallint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingInfoDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BookingInfoId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Price" Type="numeric" Nullable="false" Precision="14" Scale="4" />
+          <Property Name="Quatity" Type="numeric" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Total" Type="numeric" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="Note" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTypeId" Type="smallint" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="FloorNumber" Type="varchar" MaxLength="5" />
+          <Property Name="IsRoom" Type="bit" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="numeric" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="PermissonId" Type="smallint" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLKhachSanModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLKhachSanEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="BookingInfoes" EntityType="QLKhachSanModel.BookingInfo" />
+          <EntitySet Name="BookingInfoDetails" EntityType="QLKhachSanModel.BookingInfoDetail" />
+          <EntitySet Name="Logs" EntityType="QLKhachSanModel.Log" />
+          <EntitySet Name="Services" EntityType="QLKhachSanModel.Service" />
+          <EntitySet Name="ServiceTypes" EntityType="QLKhachSanModel.ServiceType" />
+          <EntitySet Name="Users" EntityType="QLKhachSanModel.User" />
+        </EntityContainer>
+        <EntityType Name="BookingInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerCardNo" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerInfoOther" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckingDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckOutDate" Type="DateTime" Precision="3" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="HasChangeRoom" Type="Boolean" Nullable="false" />
+          <Property Name="FromBookingInfoId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int16" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingInfoDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingInfoId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="14" Scale="4" />
+          <Property Name="Quatity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="Note" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTypeId" Type="Int16" Nullable="false" />
+          <Property Name="ActionName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="FloorNumber" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="IsRoom" Type="Boolean" Nullable="false" />
+          <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="PermissonId" Type="Int16" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLKhachSanModelStoreContainer" CdmEntityContainer="QLKhachSanEntities">
+          <EntitySetMapping Name="BookingInfoes">
+            <EntityTypeMapping TypeName="QLKhachSanModel.BookingInfo">
+              <MappingFragment StoreEntitySet="BookingInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerCardNo" ColumnName="CustomerCardNo" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CustomerInfoOther" ColumnName="CustomerInfoOther" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="CheckingDate" ColumnName="CheckingDate" />
+                <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="HasChangeRoom" ColumnName="HasChangeRoom" />
+                <ScalarProperty Name="FromBookingInfoId" ColumnName="FromBookingInfoId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingInfoDetails">
+            <EntityTypeMapping TypeName="QLKhachSanModel.BookingInfoDetail">
+              <MappingFragment StoreEntitySet="BookingInfoDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookingInfoId" ColumnName="BookingInfoId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quatity" ColumnName="Quatity" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="QLKhachSanModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ActionTypeId" ColumnName="ActionTypeId" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="QLKhachSanModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FloorNumber" ColumnName="FloorNumber" />
+                <ScalarProperty Name="IsRoom" ColumnName="IsRoom" />
+                <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTypes">
+            <EntityTypeMapping TypeName="QLKhachSanModel.ServiceType">
+              <MappingFragment StoreEntitySet="ServiceType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QLKhachSanModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PermissonId" ColumnName="PermissonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
