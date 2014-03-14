@@ -144,6 +144,17 @@ namespace EntityLibrary
 
 
        #region BookingInfoDetail
+       public BookingInfoDetail GetBookingInfoDetailById(int id)
+       {
+           var q = db.BookingInfoDetails.Where(x => x.Id.Equals(id)).FirstOrDefault();
+           return q;
+       }
+       public IList<BookingInfoDetail> GetBookingInfoDetailByBookingInfoId(int id)
+       {
+           return db.BookingInfoDetails.Where(x => x.BookingInfoId == id).ToList();
+                 
+                  
+       }
 
        public int InsertBookingInfoDetail(BookingInfoDetail model)
        {

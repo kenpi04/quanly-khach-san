@@ -78,6 +78,7 @@
     <Compile Include="ServiceType.cs">
       <DependentUpon>QLKhachSanEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThienGetService123.cs" />
     <Compile Include="ThienService.cs" />
     <Compile Include="User.cs">
       <DependentUpon>QLKhachSanEntity.tt</DependentUpon>
