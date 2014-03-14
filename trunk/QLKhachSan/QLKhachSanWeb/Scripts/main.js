@@ -37,6 +37,7 @@ function showInfoRoom(id) {
         showToolTip(tooltipRoomInfo[id]);
 
 }
+
 function initSize()
 {
     var width = $(window).width();
@@ -82,6 +83,36 @@ $(function () {
     initSize();
 });
 $(document).ready(function () {
+    $(document).on("change", "#ddlRoom", function () {
+        var ddlbooking = $("#ddlListBooking");
+        ddlbooking.html("");
+        $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val() }, function (d) {
+
+            if (d.length > 0)           {
+              
+               
+                $.each(d, function (i, e) {
+                    ddlbooking.append($("<option/>").html(e.Text).val(e.Value));
+                })
+                ddlbooking.change();
+            }
+        })
+    })
+    $(document).on("change", "#ddlListBooking", function () {
+        $.get("/Booking/RoomDetail/" + $(this).find("option:selected").val(), function (d) {
+            $("#detail").html(d);
+        })
+    })
+    $(document).on("click","#btnChangeStatus",function(){
+        changeStatus($("#ddlRoom option:selected").val(),3,false);
+    })
+
+    $(document).on("click","#btnCheckIn",function(){
+        $.get("/Booking/CheckIn",function(d){
+            showPopup(d);
+        })
+    });
+
     $(document).on("click","#btnTimKiem", function () {
         search(false);
     })
@@ -151,36 +182,47 @@ $(document).ready(function () {
     $(document).on("mouseout", "td[status],td.room", function () {
         UnTip();
     });
-    $(document).on("click", "td[status]", function (e) {
-        var strHtml = "<div class='tooltip'><select name=status roomid=" + $(this).attr("id") + " id='changeStatus'>";
-        for (var i in ROOM_STATUS) {
-            var j  = parseInt(i) + 1;
-            strHtml += "<option " + (parseInt($(this).attr("status")) == j ? "selected=true" : "") + " value=" + j + ">" + ROOM_STATUS[i] + "</option>";
-        }
-        strHtml + "</select>";        
-        strHtml += "</div>";
-        var pos = $(this).position();
-        if ($("#change").length > 0)
-            $("#change").remove();
-        $("body").append($("<div id='change'/>")
-            .html(strHtml)
-            .css({
-                position: "absolute",
-                top: pos.top,
-                left:pos.left
-            })
-            );
+    //$(document).on("click", "td[status]", function (e) {
+    //    var strHtml = "<div class='tooltip'><select name=status roomid=" + $(this).attr("id") + " id='changeStatus'>";
+    //    for (var i in ROOM_STATUS) {
+    //        var j  = parseInt(i) + 1;
+    //        strHtml += "<option " + (parseInt($(this).attr("status")) == j ? "selected=true" : "") + " value=" + j + ">" + ROOM_STATUS[i] + "</option>";
+    //    }
+    //    strHtml + "</select>";        
+    //    strHtml += "</div>";
+    //    var pos = $(this).position();
+    //    if ($("#change").length > 0)
+    //        $("#change").remove();
+    //    $("body").append($("<div id='change'/>")
+    //        .html(strHtml)
+    //        .css({
+    //            position: "absolute",
+    //            top: pos.top,
+    //            left:pos.left
+    //        })
+    //        );
         
-    });
+    //});
     $(document).on("change", "select[name=status]", function () {
-        $.post("/Booking/ChangeStatus",{ id: $(this).attr("roomid"), status: $(this).find("option:selected").val() }, function (d) {
-            if (d == 1)
-                $("select[name=status]").remove();
-                window.location.reload();
-        })
+      
+        changeStatus($(this).attr("roomid"), $(this).find("option:selected").val(),true);
     });
 
+
 })
+function changeStatus(id, status,select)
+{
+    $.post("/Booking/ChangeStatus", { id: id, status: status }, function (d) {
+        if (d == 1) {
+            alert("Cập nhật thành công!");
+            if(select)
+                $("select[name=status]").remove();
+        }
+        else
+            alert("Cập nhật không thành công");
+        window.location.reload();
+    })
+}
 $(document).on("submit", "form", function (event) {
     var form = $(this);
 

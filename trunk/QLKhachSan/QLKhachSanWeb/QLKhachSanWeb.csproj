@@ -116,10 +116,15 @@
     <Compile Include="Helper\Extension.cs" />
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckOutModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ListBookingModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\LogModel.cs" />
+    <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
+    <Compile Include="Models\ServiceTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +237,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Booking\_BookingDetail.cshtml" />
     <Content Include="Views\Booking\_RoomDetail.cshtml" />
+    <Content Include="Views\Booking\CheckIn.cshtml" />
+    <Content Include="Views\Booking\CheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
