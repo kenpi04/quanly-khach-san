@@ -105,4 +105,6 @@ margin: 0 auto;line-height: 36px;}
 #popup table.form1 td.lb {text-align:center;font-weight:bold}
 #popup table.form1 td.ct {padding-left:20px;text-align:center }
 .submit-form1 {text-align:center }
+.ct input {width:80% }
+.ct select {width:90% }
 

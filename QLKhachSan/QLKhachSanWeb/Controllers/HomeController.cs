@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using EntityLibrary;
 using QLKhachSanWeb.Models;
+using QLKhachSanWeb.Helper;
 
 namespace QLKhachSanWeb.Controllers
 {
+    [Auth]
     public class HomeController : Controller
     {
         //
@@ -73,7 +75,7 @@ namespace QLKhachSanWeb.Controllers
             HttpContext.Session["SessionUser"] = null;
             return RedirectToAction("Login", "Login");
         }
-        
+       
 
     }
 }

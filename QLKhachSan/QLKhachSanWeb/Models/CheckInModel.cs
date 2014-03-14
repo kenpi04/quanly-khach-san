@@ -8,7 +8,10 @@ namespace QLKhachSanWeb.Models
 {
     public class CheckInModel
     {
-        public IList<RoomModel> Rooms { get; set; }
+
+        public IList<SelectListItem> Rooms { get; set; }
+        public IList<SelectListItem> Status { get; set; }
+     
       
     }
 }

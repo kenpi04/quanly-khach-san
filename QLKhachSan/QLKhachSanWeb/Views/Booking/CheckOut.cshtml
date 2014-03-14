@@ -1,0 +1,39 @@
+﻿@model QLKhachSanWeb.Models.CheckOutModel
+<h1>Đăng ký nhận phòng</h1>
+           
+            
+                 <div class="pcontent">
+                <table class="form">
+                    <tr>
+                        <td class="lb">Phòng:</td>
+                        <td class="ct">
+                           @Html.DropDownList("Room", Model.Rooms, new {id="ddlRoom" })
+                        </td>
+                    </tr>
+                       <tr>
+                       <td class="lb">Danh sách đặt phòng:</td>
+                        <td class="ct">
+                          <select id="ddlListBooking"></select>
+                        </td>
+                    </tr>
+                        <tr>
+                       <td class="lb">Thông tin chi tiết:</td>
+                        <td class="ct" id="detail">
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lb">Dịch vụ:</td>
+                        <td class="ct">
+                          
+                        </td>
+                    </tr>
+                  
+              
+                </table>
+                <div class="submit-form">
+                    <input type="submit" id="btnChangeStatus" value="Check In"/>
+                    <input type="button" id="btnCancel" value="Bỏ qua"/>
+                </div>
+            </div>
+            

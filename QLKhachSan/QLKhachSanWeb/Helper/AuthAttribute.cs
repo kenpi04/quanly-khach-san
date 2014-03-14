@@ -18,7 +18,7 @@ namespace QLKhachSanWeb.Helper
            
 
             //If base authorization pass, do custom authorization
-            isLogin =httpContext.Session["User"]!=null;           
+            isLogin = httpContext.Session["SessionUser"] != null;           
 
             return isLogin;
         }

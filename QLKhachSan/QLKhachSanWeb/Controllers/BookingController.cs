@@ -96,6 +96,27 @@ namespace QLKhachSanWeb.Controllers
             _service.UpdateBookingInfo(entity);
             return 1;
         }
+
+        public ActionResult CheckIn()
+        {
+            var model = new CheckInModel();
+            model.Rooms = _service.GetRooms().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult GetListBookingInfo(int roomId)
+        {
+            var model = _service.GetListBookingInfoByRoomId(roomId).Where(y=>y.StatusId==(int)BookingInfoStatusEnums.DamBao||y.StatusId==(int)BookingInfoStatusEnums.KoDamBao).Select(x => new SelectListItem { Text = x.CustomerName, Value = x.Id.ToString() }).ToList();
+            return Json(model,JsonRequestBehavior.AllowGet);
+
+        }
+        public ActionResult CheckOut()
+        {
+            var model = new CheckOutModel();
+            model.Rooms = _service.GetRooms().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
+           
+            return View(model);
+        }
        
         
 
