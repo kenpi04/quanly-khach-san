@@ -239,6 +239,7 @@
     <Content Include="Views\Booking\_RoomDetail.cshtml" />
     <Content Include="Views\Booking\CheckIn.cshtml" />
     <Content Include="Views\Booking\CheckOut.cshtml" />
+    <Content Include="Views\Booking\_ListServices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

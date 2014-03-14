@@ -1,6 +1,7 @@
 ﻿function showPopup(str) {
     $("#popup").modal();
     $("#popup").html(str);
+    UnTip();
     $.validator.unobtrusive.parse($('form')[0]);
 
 }
@@ -103,12 +104,39 @@ $(document).ready(function () {
             $("#detail").html(d);
         })
     })
+    $(document).on("change", ".showbooking", function () {
+        $.get("/Booking/GetListBookingInfoDetail/", { bookingId: $(this).find("option:selected").val() }, function (d) {
+            $("#listService").html(d);
+            $("#AddServiceModel_ServiceId").change();
+
+            $.modal.setPosition();
+        })
+    })
     $(document).on("click","#btnChangeStatus",function(){
         changeStatus($("#ddlRoom option:selected").val(),3,false);
     })
-
+  
+    $(document).on("change", "#AddServiceModel_ServiceId", function () {
+        $.get("/Booking/GetPrice", {serviceId:$(this).find("option:selected").val()},function(d){
+            $("#AddServiceModel_Price").val(d);
+            calculatorPrice();
+        })
+       
+    })
+    $(document).on("blur", "#AddServiceModel_Price", function () {
+        calculatorPrice();
+    })
+    $(document).on("blur", "#AddServiceModel_Quatity", function () {
+        calculatorPrice();
+    })
+  
     $(document).on("click","#btnCheckIn",function(){
         $.get("/Booking/CheckIn",function(d){
+            showPopup(d);
+        })
+    });
+    $(document).on("click", "#btnCheckOut", function () {
+        $.get("/Booking/CheckOut", function (d) {
             showPopup(d);
         })
     });
@@ -210,6 +238,12 @@ $(document).ready(function () {
 
 
 })
+function calculatorPrice()
+{
+    var quatity = parseInt($("#AddServiceModel_Quatity").val());
+    var price = parseInt($("#AddServiceModel_Price").val());
+    $("#AddServiceModel_Total").val(quatity * price);
+}
 function changeStatus(id, status,select)
 {
     $.post("/Booking/ChangeStatus", { id: id, status: status }, function (d) {
@@ -225,7 +259,7 @@ function changeStatus(id, status,select)
 }
 $(document).on("submit", "form", function (event) {
     var form = $(this);
-
+    var id = form.attr("id");
     if (form.valid()) {
         
         $.ajax({
@@ -241,7 +275,11 @@ $(document).on("submit", "form", function (event) {
                     return;
                 }
                 if (d == "success") {
-                   
+                    if (id == "frmInsertService")
+                    {
+                        $(".showbooking").change();
+                        return;
+                    }
                     $.modal.close();
                    window.location.reload();
                 }

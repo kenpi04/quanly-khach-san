@@ -1,0 +1,67 @@
+﻿@model QLKhachSanWeb.Models.CheckOutModel
+@using(Html.BeginForm("InsertService", "Booking", FormMethod.Post, new {id="frmInsertService" }))
+{
+<table class="form">
+    <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.ServiceId)</td>
+        <td class="ct">@Html.DropDownListFor(x=>x.AddServiceModel.ServiceId,Model.ServicesList)
+            @Html.ValidationMessageFor(x=>x.AddServiceModel.ServiceId)
+
+        </td>
+    </tr>
+    <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Quatity)</td>
+        <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Quatity)
+               @Html.ValidationMessageFor(x=>x.AddServiceModel.Quatity)
+        </td>
+    </tr>
+       <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Note)</td>
+        <td class="ct">@Html.TextAreaFor(x=>x.AddServiceModel.Note)</td>
+    </tr>
+      <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Price)</td>
+        <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Price)</td>
+    </tr>
+      <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Total)</td>
+        <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Total)
+              @Html.ValidationMessageFor(x=>x.AddServiceModel.Total)
+        </td>
+    </tr>
+ 
+</table>
+<div class="commanda">
+    <input type="submit" id="btnInsertSV" value="Thêm" />
+    
+</div>
+}
+
+
+<table class="table-service">
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Tổng</th>
+        
+    </tr>    
+    @for (int i = 0; i > Model.Services.Count;i++ )
+    { 
+        var item=Model.Services[i];
+        <tr>
+            <td>@i</td>
+            <td>@item.ServiceName</td>
+            <td>@item.Quatity</td>
+            <td>@item.Price</td>
+            <td>@item.Total</td>
+           
+        </tr>
+    }
+    
+</table>
+<div>
+    <span>Tiền phòng: <b></b></span>
+    Tổng tiền:
+</div>
