@@ -110,6 +110,50 @@ namespace QLKhachSanWeb.Controllers
             return Json(model,JsonRequestBehavior.AllowGet);
 
         }
+        [HttpGet]
+        public ActionResult GetListBookingInfoDetail(int bookingId)
+        {
+            var model = new CheckOutModel();
+            model.Services = _service.GetBookingInfoDetailByBookingInfoId(bookingId).Select(x => new CheckOutModel.BookingInfoDetailModel
+            {
+                Id=x.Id,
+                ServiceId=x.ServiceId,
+                Quatity=x.Quatity,
+               Price=x.Price,
+               Note=x.Note,
+               Total=x.Total,
+               ServiceName=x.ServiceName,
+             
+            }).ToList();
+            model.ServicesList = _service.GetServiceS().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            return PartialView("_ListServices", model);
+        }
+        [HttpPost]
+        public ActionResult InsertService(CheckOutModel model)
+        {
+            var service = _service.ServicebyId(model.AddServiceModel.ServiceId);
+            if (service == null)
+                return Json("Dịch vụ không tồn tại");
+            var entity = new BookingInfoDetail
+            {
+                BookingInfoId = model.AddServiceModel.BookingInfoId,
+                Note = model.AddServiceModel.Note,
+                Price = service.Price,
+                Quatity = model.AddServiceModel.Quatity,
+                Total = model.AddServiceModel.Total,
+                ServiceName=service.Name
+            };
+          int i=  _service.InsertBookingInfoDetail(entity);
+          if (i == 1)
+              return Json("Thêm thành công!");
+        return Json("Lỗi! không thành công");
+            
+        }
+        [HttpGet]
+        public decimal GetPrice(int serviceId)
+        {
+            return _service.ServicebyId(serviceId).Price;
+        }
         public ActionResult CheckOut()
         {
             var model = new CheckOutModel();

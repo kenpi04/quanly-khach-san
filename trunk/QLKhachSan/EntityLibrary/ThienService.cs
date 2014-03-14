@@ -296,6 +296,13 @@ namespace EntityLibrary
                    select r;
            return q.FirstOrDefault();
        }
+       public Service ServicebyId(int id)
+       {
+           var q = from r in db.Services
+                   where !r.Deleted && r.IsActive && r.Id == id
+                   select r;
+           return q.FirstOrDefault();
+       }
        public IList<Service> GetServiceS()
        {
            var q = from r in db.Services

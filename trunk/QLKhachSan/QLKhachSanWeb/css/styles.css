@@ -36,7 +36,7 @@ ul {list-style:none }
 .content {margin-top: 86px; }
 .clearboth {clear:both }
 .command {width:940px;margin:0 auto }
-.command li{width:25%;float:left;text-align:center }
+.command li{width:20%;float:left;text-align:center }
 .search {float:right;margin-right:6px }
 .table-data {border:solid 2px  #cccccc ;width:100%;font-size:16px}
 .table-data td {text-align:center }
@@ -51,9 +51,9 @@ width: 100%;}
 .table-data tr[type=p3] {background:#c8f5ce }
 .table-data tr td:first-child {font-weight:bold }
 .table-data th[today],.table-data td[today] {background:#FFD8D8;border-bottom:#FFD8D8 }
-.table-data td[status='1'] {background:green }
-.table-data td[status='2'] {background:red }
-.table-data td[status='3'] {background:blue }
+.table-data td[status='1'] {background:#A0E0A0 }
+.table-data td[status='2'] {background:#FAA3A3 }
+.table-data td[status='3'] {background:#A8A8F1 }
 
 .fixed { position: fixed; /* height: 56px; */ top: 0; background: #ddd; width: 100%;border-bottom:solid 2px #FF6B6B }
 button, input[type=button], input[type=submit] {background:#ff6a00;padding:5px;color:#fff;border:none;cursor:pointer}
@@ -85,8 +85,9 @@ border:5px solid black; /*Border around tooltip*/
 background:white;
 z-index:3000;
 }
-
-
+#frmInsertService input[type=text] {width: 53% }
+#frmInsertService select {width:56% }
+#frmInsertService .commanda {text-align:center }
 .stickytooltip .stickystatus{ /*Style for footer bar within tooltip*/
 background:black;
 color:white;
@@ -107,4 +108,8 @@ margin: 0 auto;line-height: 36px;}
 .submit-form1 {text-align:center }
 .ct input {width:80% }
 .ct select {width:90% }
+.table-service {width:100%;border: solid 1px #C1C1C1; }
+.table-service td, .table-service th {border:solid 1px #c1c1c1 }
+.table-service tr:first-child {background:#cccccc; }
+
 
