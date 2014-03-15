@@ -141,7 +141,8 @@ namespace QLKhachSanWeb.Controllers
                 Price = service.Price,
                 Quatity = model.AddServiceModel.Quatity,
                 Total = model.AddServiceModel.Total,
-                ServiceName=service.Name
+                ServiceName=service.Name,
+                ServiceId=model.AddServiceModel.ServiceId
             };
           int i=  _service.InsertBookingInfoDetail(entity);
           if (i == 1)

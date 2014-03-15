@@ -1,7 +1,8 @@
 ﻿@model QLKhachSanWeb.Models.CheckOutModel
 <h1>Đăng ký nhận phòng</h1>
            
-            
+     @using(Html.BeginForm("InsertService", "Booking", FormMethod.Post, new {id="frmInsertService" }))
+{       
                  <div class="pcontent">
                 <table class="form">
                     <tr>
@@ -13,7 +14,8 @@
                        <tr>
                        <td class="lb">Danh sách đặt phòng:</td>
                         <td class="ct">
-                          <select id="ddlListBooking" class="showbooking"></select>
+                       
+                          <select name="AddServiceModel.BookingInfoId" id="ddlListBooking" class="showbooking"></select>
                         </td>
                     </tr>
                         <tr>
@@ -32,4 +34,4 @@
                     <input type="button" id="btnCancel" value="Bỏ qua"/>
                 </div>
             </div>
-            
+     }
