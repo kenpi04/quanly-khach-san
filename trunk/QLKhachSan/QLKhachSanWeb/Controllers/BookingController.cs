@@ -51,7 +51,10 @@ namespace QLKhachSanWeb.Controllers
                UserId=((User)Session["User"]).Id
             };
             if (_service.InsertBookingInfo(entity) == 1)
+            {
+                _service.WriteLogAction("Book phòng", entity.UserId);
                 return Json("success");
+            }
             return Json("fail");
                    
                
@@ -94,6 +97,8 @@ namespace QLKhachSanWeb.Controllers
                 return 0;
             entity.StatusId =(short)status;
             _service.UpdateBookingInfo(entity);
+            string action=string.Format("Khách {0} đến nhận phòng {1}",entity.CustomerName,_service.GetRoomById(entity.RoomId).Name);
+            _service.WriteLogAction(action, ((User)Session["SessionUser"]).Id);
             return 1;
         }
 
@@ -113,7 +118,18 @@ namespace QLKhachSanWeb.Controllers
         [HttpGet]
         public ActionResult GetListBookingInfoDetail(int bookingId)
         {
+            var booking = _service.GetBookingInforById(bookingId);
+            if (booking == null)
+                return Json("Thông tin không hợp lệ!");
             var model = new CheckOutModel();
+            var room = _service.GetRoomById(booking.RoomId);
+            model.Room = new RoomModel
+            {
+                Id=room.Id,
+                Name=room.Name,
+                TypeName=_service.GetServiceTypeById(room.ServiceTypeId).Name,
+                Price=room.Price
+            };
             model.Services = _service.GetBookingInfoDetailByBookingInfoId(bookingId).Select(x => new CheckOutModel.BookingInfoDetailModel
             {
                 Id=x.Id,
@@ -122,9 +138,10 @@ namespace QLKhachSanWeb.Controllers
                Price=x.Price,
                Note=x.Note,
                Total=x.Total,
-               ServiceName=x.ServiceName,
+               ServiceName=x.ServiceName
              
             }).ToList();
+            model.Total = model.Room.Price + model.Services.Sum(x => x.Total);
             model.ServicesList = _service.GetServiceS().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             return PartialView("_ListServices", model);
         }
@@ -146,7 +163,13 @@ namespace QLKhachSanWeb.Controllers
             };
           int i=  _service.InsertBookingInfoDetail(entity);
           if (i == 1)
-              return Json("Thêm thành công!");
+          {
+           var bookingInfo=_service.GetBookingInforById(entity.BookingInfoId);
+              var room=_service.GetRoomById(bookingInfo.RoomId);
+              string action = string.Format("Thêm {0} dịch vụ {1} cho phòng {2} với giá {3}", entity.Quatity, service.Name, room.Name, entity.Price);
+              _service.WriteLogAction(action, ((User)Session["SessionUser"]).Id);
+              return Json("success");
+          }
         return Json("Lỗi! không thành công");
             
         }
@@ -161,6 +184,54 @@ namespace QLKhachSanWeb.Controllers
             model.Rooms = _service.GetRooms().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
            
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult CheckOut(int bookingInfoId)
+        {
+            var bookingInfo = _service.GetBookingInforById(bookingInfoId);
+            if (bookingInfo == null)
+                return Json("Thông tin không tồn tại!");
+            bookingInfo.StatusId = (int)BookingInfoStatusEnums.PhongDaCheckOut;
+            int i = _service.UpdateBookingInfo(bookingInfo);
+            if (i == 0)
+                return Json("Lỗi không thành công!");
+
+            var model = new CheckOutModel();
+            model.Services = _service.GetBookingInfoDetailByBookingInfoId(bookingInfoId).Select(x => new CheckOutModel.BookingInfoDetailModel
+            {
+                Id = x.Id,
+                ServiceId = x.ServiceId,
+                Quatity = x.Quatity,
+                Price = x.Price,
+                Note = x.Note,
+                Total = x.Total,
+                ServiceName = x.ServiceName,
+
+            }).ToList();
+            var room = _service.GetRoomById(bookingInfo.RoomId);
+            model.Room = new RoomModel
+            {
+                Id = room.Id,
+                Name = room.Name,
+                TypeName = _service.GetServiceTypeById(room.ServiceTypeId).Name,
+                Price = room.Price
+            };
+            model.BookingInfo = new BookingModel.BookingInfoModel{ 
+                Id=bookingInfo.Id,
+                RoomId=bookingInfo.RoomId,
+                CheckingDate=bookingInfo.CheckingDate.Value,
+                CheckOutDate=bookingInfo.CheckOutDate.Value,
+                CustomerName=bookingInfo.CustomerName,
+                
+            };
+            model.Total = model.Services.Sum(x => x.Total);
+            string action = string.Format("Thanh toán cho phòng{0} số tiền {1}",room.Name,model.Total);
+            _service.WriteLogAction(action, ((User)Session["SessionUser"]).Id);
+            return PartialView("_CheckOutDetail", model);
+
+           
+
+
         }
        
         

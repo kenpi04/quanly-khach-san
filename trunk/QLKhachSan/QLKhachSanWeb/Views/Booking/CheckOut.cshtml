@@ -1,5 +1,5 @@
 ﻿@model QLKhachSanWeb.Models.CheckOutModel
-<h1>Đăng ký nhận phòng</h1>
+<h1>Trả phòng</h1>
            
      @using(Html.BeginForm("InsertService", "Booking", FormMethod.Post, new {id="frmInsertService" }))
 {       
@@ -30,7 +30,7 @@
                 </table>
                   <div id="listService"></div>
                 <div class="submit-form">
-                    <input type="submit" id="btnChangeStatus" value="Check In"/>
+                    <input type="button" id="btnPayment" value="Thanh toán"/>
                     <input type="button" id="btnCancel" value="Bỏ qua"/>
                 </div>
             </div>

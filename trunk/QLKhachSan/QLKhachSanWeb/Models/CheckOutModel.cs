@@ -15,10 +15,11 @@ namespace QLKhachSanWeb.Models
             Services = new List<BookingInfoDetailModel>();
             AddServiceModel = new BookingInfoDetailModel();
             ServicesList = new List<SelectListItem>();
-            BookingInfo = new BookingModel();
+            BookingInfo = new BookingModel.BookingInfoModel();
 
         }
-        public BookingModel BookingInfo { get; set; }
+        public RoomModel Room { get; set; }
+        public BookingModel.BookingInfoModel BookingInfo { get; set; }
         public IList<SelectListItem> Rooms { get; set; }
         
         public IList<BookingInfoDetailModel> Services { get; set; }
@@ -50,5 +51,7 @@ namespace QLKhachSanWeb.Models
 
             public object CreateOnDate { get; set; }
         }
+
+        public decimal Total { get; set; }
     }
 }

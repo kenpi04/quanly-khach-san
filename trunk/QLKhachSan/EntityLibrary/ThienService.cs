@@ -371,7 +371,14 @@ namespace EntityLibrary
 
        #endregion
 
-
+       public void WriteLogAction(string TileLog, int UserId)
+       {
+           Log team = new Log();
+           team.ActionName = TileLog;
+           team.CreatedDate = DateTime.Now;
+           team.UserId = UserId;
+           InsertLog(team);
+       }
 
 
 
