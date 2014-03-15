@@ -41,7 +41,7 @@ namespace QLKhachSanWeb.Controllers
                 if (team.PermissonId == 2)
                     return RedirectToAction("QuyenTruyCap", "Admin");
                 else
-                    return RedirectToAction("XemLog");
+                    return RedirectToAction("XemLog", "Admin");
             }
         }
 
