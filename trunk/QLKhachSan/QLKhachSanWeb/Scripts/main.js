@@ -108,8 +108,7 @@ $(document).ready(function () {
         $.get("/Booking/GetListBookingInfoDetail/", { bookingId: $(this).find("option:selected").val() }, function (d) {
             $("#listService").html(d);
             $("#AddServiceModel_ServiceId").change();
-
-            $.modal.setPosition();
+                     $.modal.setPosition();
         })
     })
     $(document).on("click","#btnChangeStatus",function(){
