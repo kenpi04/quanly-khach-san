@@ -610,5 +610,13 @@ namespace QLKhachSanWeb.Controllers
         }
 
         #endregion
+
+
+        //Bao cao
+        public ActionResult ReportAddmin()
+        {
+
+            return View();
+        }
     }
 }
