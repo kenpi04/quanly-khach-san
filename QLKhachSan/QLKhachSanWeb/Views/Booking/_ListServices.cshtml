@@ -53,9 +53,9 @@
     { 
         var item=Model.Services[i];
         <tr>
-            <td>@i</td>
+            <td>@(i+1)</td>
             <td>@item.ServiceName</td>
-            <td>@item.Quatity</td>
+            <td>@item.Quatity.ToString("0.00")</td>
             <td>@String.Format("{0:0,0}",item.Price)</td>
             <td>@String.Format("{0:0,0}", item.Total)</td>
            
@@ -63,7 +63,8 @@
     }
     
 </table>
-<div>
-    <span>Tiền phòng: <b></b></span>
-    Tổng tiền:
-</div>
+<div class="info">
+    <span><b>Loại phòng:</b>@Model.Room.TypeName</span><br />
+    <span><b>Tiền phòng:</b>@String.Format("{0:0,0}",Model.Room.Price)</span><br />
+    <span><b>Tổng tiền:</b>@String.Format("{0:0,0}",Model.Total)</span><br />
+   </div>

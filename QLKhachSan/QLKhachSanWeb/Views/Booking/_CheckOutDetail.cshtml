@@ -1,0 +1,49 @@
+﻿@model QLKhachSanWeb.Models.CheckOutModel
+<h1>Thông tin thanh toán</h1>
+  <div class="pcontent">
+<table class="form">
+    <tr>
+        <td class="lb">Phòng:</td>
+        <td class="ct">@Model.Room.Name</td>
+    </tr>
+    <tr>
+        <td class="lb">Loại phòng:</td>
+        <td class="ct">@Model.Room.TypeName</td>
+    </tr>
+    <tr>
+        <td class="lb">Tên khách hàng:</td>
+        <td class="ct">@Model.BookingInfo.CustomerName</td>
+
+    </tr>
+    
+    
+</table>
+<table class="table-service">
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Tổng</th>
+        
+    </tr>    
+    @for (int i = 0; i < Model.Services.Count;i++ )
+    { 
+        var item=Model.Services[i];
+        <tr>
+            <td>@i</td>
+            <td>@item.ServiceName</td>
+            <td>@item.Quatity.ToString("0.00")</td>
+            <td>@String.Format("{0:0,0}",item.Price)</td>
+            <td>@String.Format("{0:0,0}", item.Total)</td>
+           
+        </tr>
+    }
+    
+</table>
+
+<div class="total">
+    <span>Tiền phòng:@Model.Room.Price</span></br>
+    <span>Tổng tiền:@Model.Total</span></div>
+
+      </div>

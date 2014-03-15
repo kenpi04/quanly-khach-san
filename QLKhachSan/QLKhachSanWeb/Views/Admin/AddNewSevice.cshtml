@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
 @model QLKhachSanWeb.Models.ServiceModel
+<div class="admin-form">
 <h1>Thêm dịch vụ mới</h1>
        @using (Html.BeginForm())
        {
@@ -29,8 +30,9 @@
                         </td>
                    </tr>
                </table>
-                <div>
+                <div class="cmd">
                     <input type="submit" id="btnSave" value="Thêm mới"/>
                 </div>
            </div>
        }
+    </div>

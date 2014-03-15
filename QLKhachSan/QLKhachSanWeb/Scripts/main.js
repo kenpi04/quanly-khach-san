@@ -84,6 +84,12 @@ $(function () {
     initSize();
 });
 $(document).ready(function () {
+    $(document).ajaxStart(function () {
+        $(".div-loading").show();
+    }).ajaxComplete(function () {
+        $(".div-loading").hide();
+    })
+    $(document).on("mouseenter", "#simplemodal-overlay", function () { UnTip(); })
     $(document).on("change", "#ddlRoom", function () {
         var ddlbooking = $("#ddlListBooking");
         ddlbooking.html("");
@@ -132,11 +138,13 @@ $(document).ready(function () {
     $(document).on("click","#btnCheckIn",function(){
         $.get("/Booking/CheckIn",function(d){
             showPopup(d);
+            
         })
     });
     $(document).on("click", "#btnCheckOut", function () {
         $.get("/Booking/CheckOut", function (d) {
             showPopup(d);
+            $("#ddlRoom").change();
         })
     });
 
@@ -180,7 +188,9 @@ $(document).ready(function () {
             $(".datepicker").datepicker({format:"dd/MM/yyyy"});
         })
     })
-
+    $(document).on("click","#btnPayment",function () {
+        Payment();
+    })
     $("#btnXemLog").bind("click", function () {
         $.get("/Admin/AddUsers", function (d) {
 
@@ -237,6 +247,23 @@ $(document).ready(function () {
 
 
 })
+function Payment()
+{
+    var id = $("#ddlListBooking option:selected").val();
+    $.ajax({
+        type: "POST",
+        url: "/Booking/CheckOut",
+        data: { bookingInfoId: id },
+        success: function (d) {
+            if (d.length < 50)
+                alert(d);
+            else
+            {
+                $("#popup").html(d);
+            }
+        }
+    })
+}
 function calculatorPrice()
 {
     var quatity = parseInt($("#AddServiceModel_Quatity").val());
@@ -276,7 +303,9 @@ $(document).on("submit", "form", function (event) {
                 if (d == "success") {
                     if (id == "frmInsertService")
                     {
-                        $(".showbooking").change();
+                        $("#simplemodal-container").css("top","10px")
+                        alert("Thêm thành công!");
+                        $("#ddlListBooking").change();
                         return;
                     }
                     $.modal.close();

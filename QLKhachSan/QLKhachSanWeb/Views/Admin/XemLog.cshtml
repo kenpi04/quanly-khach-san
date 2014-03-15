@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
 @model QLKhachSanWeb.Models.ListLogModel
-<table>
+<table class="table-service">
     <tr>
         <td>Mã nhật kí</td>
         <td>Ngày thực hiện</td>
@@ -20,6 +20,8 @@
      }
     <tr>
         <td>
+            @if(Model.PageInfo.TotalPages>1)
+            {
             <div>Trang:
             @{for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
               {
@@ -27,6 +29,7 @@
               }
             }
             </div>
+            }
         </td>
     </tr>
 </table>

@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
+<div class="admin-form">
 <h1>Cập nhật thông tin</h1>
        @using (Html.BeginForm())
         {
@@ -42,8 +43,9 @@
                         </td>
                     </tr>
                 </table>
-                <div>
+                <div class="cmd">
                     <input type="submit" id="btnSave" value="Cập nhật"/>
                 </div>
             </div>
        }
+    </div>

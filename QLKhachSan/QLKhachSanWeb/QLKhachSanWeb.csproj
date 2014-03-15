@@ -193,6 +193,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="css\images\ajax-loader.gif" />
     <Content Include="css\images\animated-overlay.gif" />
     <Content Include="css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -240,6 +241,46 @@
     <Content Include="Views\Booking\CheckIn.cshtml" />
     <Content Include="Views\Booking\CheckOut.cshtml" />
     <Content Include="Views\Booking\_ListServices.cshtml" />
+    <Content Include="Views\Booking\_CheckOutDetail.cshtml" />
+    <Content Include="Views\Admin\AddNewSevice.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\AddNewSeviceRoom.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\AddNewSevicetypeRoom.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\AddUsers.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\ListService.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\ListServiceRoom.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\ListUsers.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\QuyenTruyCap.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\UpdateService.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\UpdateServiceRoom.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\UpdateUser.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Admin\XemLog.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
