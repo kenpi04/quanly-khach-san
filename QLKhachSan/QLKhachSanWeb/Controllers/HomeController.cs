@@ -27,7 +27,8 @@ namespace QLKhachSanWeb.Controllers
         }
         public ActionResult Index()
         {
-            ViewBag.QuyenUser = KTQuyenUser();
+           // ViewBag.QuyenUser = KTQuyenUser();
+            ViewBag.QuyenUser = 1;
             return View();
         }
 

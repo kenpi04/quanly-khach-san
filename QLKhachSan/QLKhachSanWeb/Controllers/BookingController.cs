@@ -48,7 +48,7 @@ namespace QLKhachSanWeb.Controllers
                BookingDate=DateTime.Now,
                CreatedDate=DateTime.Now,
                LastUpdateDate=DateTime.Now,
-               UserId=((User)Session["SessionUser"]).Id
+               UserId = ((User)Session["SessionUser"]).Id
             };
             if (_service.InsertBookingInfo(entity) == 1)
             {
