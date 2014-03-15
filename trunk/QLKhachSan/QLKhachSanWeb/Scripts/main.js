@@ -316,7 +316,8 @@ $(document).on("submit", "form", function (event) {
 
             },
             error: function () {
-                alert("Lỗi ! không thành công!");
+                alert("Lỗi ! không thành công!bạn chưa đăng nhập");
+                location.reload();
             }
         });
     }
