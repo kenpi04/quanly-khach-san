@@ -112,7 +112,7 @@ margin: 0 auto;line-height: 36px;}
 .table-service td, .table-service th {border:solid 1px #c1c1c1;padding:5px }
 .simplemodal-container {top:30px !important }
 .table-service tr:first-child {background:#cccccc;font-weight:bold }
-.div-loading {position:absolute;left:0;top:0;background:url(images/ajax-loader.gif) no-repeat;width:42px;height:42px;z-index:100;display:none }
+.div-loading {position:absolute;left:0;top:0;background:url(images/ajax-loader.gif) no-repeat;width:42px;height:42px;z-index:1000000;display:none }
 
 .info {line-height:24px }
 .admin-form {width:600px;margin:10px auto;font-size:14px}
