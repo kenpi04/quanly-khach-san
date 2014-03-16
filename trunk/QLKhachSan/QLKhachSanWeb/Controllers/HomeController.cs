@@ -76,6 +76,62 @@ namespace QLKhachSanWeb.Controllers
             HttpContext.Session["SessionUser"] = null;
             return RedirectToAction("Login", "Login");
         }
+
+
+        ThienGetService123 _service = new ThienGetService123();
+        public ActionResult ReportUser()
+        {
+
+            ListReportModel model = new ListReportModel();
+            List<ReportEntity> List = _service.GetReportNowDay(null, null);
+            decimal SumPriceReport = 0;
+            foreach (ReportEntity gt in List)
+            {
+                ReportModel team = new ReportModel();
+                team.Rom = gt.Rom;
+                team.Name = gt.Name;
+                team.CMND = gt.CMND;
+                team.StarDay = gt.StarDay;
+                team.EndDay = gt.EndDay;
+                team.PriceRom = gt.PriceRom;
+                team.NameService = gt.NameService;
+                team.PriceService = gt.PriceService;
+                team.SumPrice = gt.SumPrice;
+                model.ReportDetail.Add(team);
+                SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+            }
+            model.SumPriceReport = SumPriceReport.ToString();
+            model.StarDaySearch = "";
+            model.EndDaySearch = "";
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ReportUser(ListReportModel model)
+        {
+            if (model.StarDaySearch == "")
+                model.StarDaySearch = null;
+            if (model.EndDaySearch == "")
+                model.EndDaySearch = null;
+            List<ReportEntity> List = _service.GetReportNowDay(model.StarDaySearch, model.EndDaySearch);
+            decimal SumPriceReport = 0;
+            foreach (ReportEntity gt in List)
+            {
+                ReportModel team = new ReportModel();
+                team.Rom = gt.Rom;
+                team.Name = gt.Name;
+                team.CMND = gt.CMND;
+                team.StarDay = gt.StarDay;
+                team.EndDay = gt.EndDay;
+                team.PriceRom = gt.PriceRom;
+                team.NameService = gt.NameService;
+                team.PriceService = gt.PriceService;
+                team.SumPrice = gt.SumPrice;
+                model.ReportDetail.Add(team);
+                SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+            }
+            model.SumPriceReport = SumPriceReport.ToString();
+            return View(model);
+        }
        
 
     }

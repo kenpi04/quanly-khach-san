@@ -1,16 +1,23 @@
-﻿@{
-    Layout = "~/Views/Shared/_AdminRoot.cshtml";
-}
+﻿
 @model QLKhachSanWeb.Models.ListReportModel
 <div>
-      <script src="~/Scripts/thienmain.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.simplemodal.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+     <link href="~/css/styles.css" rel="stylesheet" />
+     <link href="~/css/jquery-ui.css" rel="stylesheet" />
+     <script src="~/Scripts/thienmain.js"></script>
     @using (Html.BeginForm())
        {
         <div>
-                 
+               
                  Từ ngày @Html.TextBoxFor(x => x.StarDaySearch, new { @class = "datepicker",Value="" })
                  đến ngày @Html.TextBoxFor(x => x.EndDaySearch, new { @class = "datepicker",Value="" })
                  <button type="submit" id="btnxembaocao">Xem Báo Cáo</button>
+                 <a href="~/Home/Index"> <button type="button" id="btnxembaocao">Về Trang Chủ</button></a>
              </div>    
          }
     <div>
@@ -87,21 +94,4 @@
       </div>
 
 </div>
-@*
-<script type="text/javascript">
-    $(document).ready(function (e) {
-        $('#form2').submit(function () {
-            var SearchModel = {
-                StarDaySearch: $("input[name=fromdate]").val(),
-                EndDaySearch: $("input[name=todate]").val()
-            }
-            $.post('ReportAddmin', SearchModel)
-            .success(function () { return true;})
-               .error(function () { return false;});
 
-            return false;
-
-        });
-    });
-</script>
-*@
