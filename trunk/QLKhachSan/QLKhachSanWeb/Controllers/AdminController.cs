@@ -244,6 +244,42 @@ namespace QLKhachSanWeb.Controllers
                 }
             }
         }
+        [HttpPost]
+        public ActionResult XemLog(ListLogModel modelview)
+        {
+           
+            if (modelview.StarDaySearch == "")
+                modelview.StarDaySearch = null;
+            if (modelview.EndDaySearch == "")
+                modelview.EndDaySearch = null;
+            List<LogModel> model = new List<LogModel>();
+            var listLog = _service.GetListLog(modelview.StarDaySearch,modelview.EndDaySearch);
+            foreach (Log lg in listLog)
+            {
+                LogModel team = new LogModel();
+                team.id = lg.Id;
+                team.ActionName = lg.ActionName;
+                team.UserId = lg.UserId;
+                team.UserName = _service.GetUsersByID(lg.UserId).UserName;
+                team.Name = _service.GetUsersByID(lg.UserId).Name;
+                team.CreateDate = lg.CreatedDate.ToString();
+                model.Add(team);
+            }
+            int size = 1;
+            ListLogModel modelview1 = new ListLogModel()
+            {
+                ListLogs = model
+                .Skip((size - 1) * model.Count())
+                .Take(model.Count()),
+                PageInfo = new PageInfo
+                {
+                    CurrentPage = size,
+                    ItemsPerPage = model.Count(),
+                    TotalItems = model.Count()
+                }
+            };
+            return View(modelview1);
+        }
 
         #endregion
 
