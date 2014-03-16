@@ -117,6 +117,38 @@ namespace EntityLibrary
             var query = from p in db.Logs orderby p.Id descending select p;
             return query.ToList();
         }
+        public List<Log> GetListLog(string FromDay, string ToDay)
+        {
+            string DayNow = DateTime.Now.ToShortDateString();
+
+            string DayNowStar = DayNow + " 12:00:00 AM";
+            string DayNowEnd = DayNow + " 11:59:59 PM";
+            if (FromDay != null && ToDay == null)
+            {
+                DayNowStar = FromDay + " 12:00:00 AM";
+            }
+            if (FromDay != null && ToDay != null)
+            {
+                DayNowStar = FromDay + " 12:00:00 AM";
+                DayNowEnd = ToDay + " 11:59:59 PM";
+            }
+
+            DateTime team1 = Convert.ToDateTime(DayNowStar);
+            DateTime team2 = Convert.ToDateTime(DayNowEnd);
+            if (FromDay != null && ToDay == null)
+            {
+              var query = from p in db.Logs where p.CreatedDate>=team1 orderby p.Id descending select p;
+              return query.ToList();
+            }
+            if (FromDay != null && ToDay != null)
+            {
+                var query = from p in db.Logs where p.CreatedDate >= team1 && p.CreatedDate<=team2 orderby p.Id descending select p;
+                return query.ToList();
+            }
+            var query1 = from p in db.Logs orderby p.Id descending select p;
+            return query1.ToList();
+        }
+
 
 
 
