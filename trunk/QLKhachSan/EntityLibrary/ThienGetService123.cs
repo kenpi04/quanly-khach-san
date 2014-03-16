@@ -257,15 +257,24 @@ namespace EntityLibrary
 
         #region ReportList
 
-        public List<ReportEntity> GetReportNowDay()
+        public List<ReportEntity> GetReportNowDay(string FromDay,string ToDay)
         {
             string DayNow = DateTime.Now.ToShortDateString();
 
             //3/16/2014 12:00:00 AM
 
-            string DayNowStar = DayNow+" 12:00:00 AM";
+            string DayNowStar = DayNow + " 12:00:00 AM";
             string DayNowEnd = DayNow + " 11:59:59 PM";
-
+            if (FromDay != null && ToDay == null)
+            {
+                DayNowStar = FromDay + " 12:00:00 AM";
+            }
+            if (FromDay!=null && ToDay!=null)
+            {
+                DayNowStar = FromDay + " 12:00:00 AM";
+                DayNowEnd = ToDay + " 11:59:59 PM";
+            }
+          
             DateTime team1 = Convert.ToDateTime(DayNowStar);
             DateTime team2 = Convert.ToDateTime(DayNowEnd); 
 
