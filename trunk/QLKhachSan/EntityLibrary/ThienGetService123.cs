@@ -253,5 +253,95 @@ namespace EntityLibrary
         }
 
         #endregion
+
+
+        #region ReportList
+
+        public List<ReportEntity> GetReportNowDay()
+        {
+            string DayNow = DateTime.Now.ToShortDateString();
+
+            //3/16/2014 12:00:00 AM
+
+            string DayNowStar = DayNow+" 12:00:00 AM";
+            string DayNowEnd = DayNow + " 11:59:59 PM";
+
+            DateTime team1 = Convert.ToDateTime(DayNowStar);
+            DateTime team2 = Convert.ToDateTime(DayNowEnd); 
+
+            List<ReportEntity> List = new List<ReportEntity>();
+            var query = from p in db.BookingInfoes where p.CheckOutDate>=team1 && p.CheckOutDate<=team2 && p.StatusId==4 select p;
+            foreach (BookingInfo sv in query)
+            {
+                ReportEntity gt = new ReportEntity();
+                gt.Rom = db.Services.Find(sv.RoomId).Name;
+                gt.Name = sv.CustomerName;
+                gt.CMND = sv.CustomerCardNo;
+                gt.StarDay = sv.CheckingDate.ToString();
+                gt.EndDay = sv.CheckOutDate.ToString();
+                gt.PriceRom = GetPriceRoom(sv.Id);
+                gt.NameService = GetNameService(sv.Id);
+                gt.PriceService = GetPriceService(sv.Id);
+                gt.SumPrice = (Convert.ToDecimal(gt.PriceRom) + Convert.ToDecimal(gt.PriceService)).ToString();
+                List.Add(gt);
+            }
+
+            return List;
+        }
+
+        public string GetPriceRoom(int BookingInfoId)
+        {
+            string PriceRomm = "0";
+            try
+            {
+                var query = (from p in db.BookingInfoDetails
+                             join q in db.Services on p.ServiceId equals q.Id
+                             where p.BookingInfoId == BookingInfoId && q.IsRoom == true
+                             select p.Total).Sum();
+                PriceRomm = query.ToString();
+            }
+            catch (Exception e) { }
+            return PriceRomm;
+        }
+        public string GetNameService(int BookingInfoId)
+        {
+           
+                string NameService = "Không";
+                try
+                {
+                var query = from p in db.BookingInfoDetails
+                            join q in db.Services on p.ServiceId equals q.Id
+                            where p.BookingInfoId == BookingInfoId && q.IsRoom == false
+                            select q;
+                if (query.Count() > 0)
+                {
+                    NameService = "";
+                    foreach (var sv in query)
+                    {
+                        NameService = NameService + sv.Name + ",";
+                    }
+                }
+            }
+            catch (Exception e) { }
+            return NameService;
+        }
+
+
+        public string GetPriceService(int BookingInfoId)
+        {
+            string PriceRomm = "0";
+            try
+            {
+                var query = (from p in db.BookingInfoDetails
+                             join q in db.Services on p.ServiceId equals q.Id
+                             where p.BookingInfoId == BookingInfoId && q.IsRoom == false
+                             select p.Total).Sum();
+                PriceRomm = query.ToString();
+            }
+            catch (Exception e) { }
+            return PriceRomm;
+        }
+        #endregion
+
     }
 }
