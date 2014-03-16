@@ -17,6 +17,8 @@ namespace QLKhachSanWeb.Models
 
     public class ListLogModel 
     {
+        public string StarDaySearch { get; set; }
+        public string EndDaySearch { get; set; }
         public IEnumerable<QLKhachSanWeb.Models.LogModel> ListLogs { get; set; }
         public PageInfo PageInfo { get; set; }
     }
