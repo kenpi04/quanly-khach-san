@@ -613,10 +613,30 @@ namespace QLKhachSanWeb.Controllers
 
 
         //Bao cao
-        public ActionResult ReportAddmin()
+        public ActionResult ReportAddmin(DateTime? startDate, DateTime? endDate)
         {
-
-            return View();
+            ListReportModel model = new ListReportModel();
+           List<ReportEntity> List = _service.GetReportNowDay();
+           decimal SumPriceReport = 0;
+           foreach (ReportEntity gt in List)
+           {
+               ReportModel team = new ReportModel();
+               team.Rom = gt.Rom;
+                team.Name = gt.Name;
+                team.CMND  =gt.CMND;
+                team.StarDay =gt.StarDay;
+                team.EndDay = gt.EndDay;
+                team.PriceRom = gt.PriceRom;
+                team.NameService = gt.NameService;
+                team.PriceService =gt.PriceService;
+                team.SumPrice = gt.SumPrice;
+                model.ReportDetail.Add(team);
+                SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+           }
+           model.SumPriceReport = SumPriceReport.ToString();
+            return View(model);
         }
+
+       
     }
 }
