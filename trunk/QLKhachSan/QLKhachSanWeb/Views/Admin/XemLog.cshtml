@@ -2,6 +2,19 @@
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
 @model QLKhachSanWeb.Models.ListLogModel
+     <script src="~/Scripts/thienmain.js"></script>
+@*
+  @using (Html.BeginForm())
+       {
+        <div>
+               
+                 Từ ngày @Html.TextBoxFor(x => x.StarDaySearch, new { @class = "datepicker",Value="" })
+                 đến ngày @Html.TextBoxFor(x => x.EndDaySearch, new { @class = "datepicker",Value="" })
+                 <button type="submit" id="btnxembaocao">Tìm kiếm</button>
+             </div>    
+         }
+*@
+
 <table class="table-service">
     <tr>
         <td>Mã nhật kí</td>
