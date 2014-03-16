@@ -618,28 +618,39 @@ namespace QLKhachSanWeb.Controllers
         //Bao cao
         public ActionResult ReportAddmin()
         {
-            ListReportModel model = new ListReportModel();
-            List<ReportEntity> List = _service.GetReportNowDay(null, null);
-            decimal SumPriceReport = 0;
-            foreach (ReportEntity gt in List)
+            User team1 = KTQUyen();
+            if (team1 == null)
+                return RedirectToAction("Login", "Login");
+            else
             {
-                ReportModel team = new ReportModel();
-                team.Rom = gt.Rom;
-                team.Name = gt.Name;
-                team.CMND = gt.CMND;
-                team.StarDay = gt.StarDay;
-                team.EndDay = gt.EndDay;
-                team.PriceRom = gt.PriceRom;
-                team.NameService = gt.NameService;
-                team.PriceService = gt.PriceService;
-                team.SumPrice = gt.SumPrice;
-                model.ReportDetail.Add(team);
-                SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+                if (team1.PermissonId == 2)
+                    return RedirectToAction("QuyenTruyCap", "Admin");
+                else
+                {
+                    ListReportModel model = new ListReportModel();
+                    List<ReportEntity> List = _service.GetReportNowDay(null, null);
+                    decimal SumPriceReport = 0;
+                    foreach (ReportEntity gt in List)
+                    {
+                        ReportModel team = new ReportModel();
+                        team.Rom = gt.Rom;
+                        team.Name = gt.Name;
+                        team.CMND = gt.CMND;
+                        team.StarDay = gt.StarDay;
+                        team.EndDay = gt.EndDay;
+                        team.PriceRom = gt.PriceRom;
+                        team.NameService = gt.NameService;
+                        team.PriceService = gt.PriceService;
+                        team.SumPrice = gt.SumPrice;
+                        model.ReportDetail.Add(team);
+                        SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+                    }
+                    model.SumPriceReport = SumPriceReport.ToString();
+                    model.StarDaySearch = "";
+                    model.EndDaySearch = "";
+                    return View(model);
+                }
             }
-            model.SumPriceReport = SumPriceReport.ToString();
-            model.StarDaySearch = "";
-            model.EndDaySearch = "";
-            return View(model);
         }
         
         [HttpPost]

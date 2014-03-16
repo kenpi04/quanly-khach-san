@@ -141,6 +141,7 @@ $(document).ready(function () {
             
         })
     });
+
     $(document).on("click", "#btnCheckOut", function () {
         $.get("/Booking/CheckOut", function (d) {
             showPopup(d);
