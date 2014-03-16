@@ -3,14 +3,21 @@
 }
 @model QLKhachSanWeb.Models.ListReportModel
 <div>
-      <div>
-                  Từ ngày <input type="text" class="datepicker" name="fromdate" /> 
-                  đến ngày <input type="text" class="datepicker" name="todate" />
-                  <button id="btnTimKiem">Xem Báo Cáo</button>
-              </div>
-   
+      <script src="~/Scripts/thienmain.js"></script>
+    @using (Html.BeginForm())
+       {
         <div>
-            <table class="table-service">
+                  @*Từ ngày <input type="text" class="datepicker" name="fromdate" /> 
+                  đến ngày <input type="text" class="datepicker" name="todate" />
+                  <button type="submit" id="btnxembaocao">Xem Báo Cáo</button>*@
+
+                 Từ ngày @Html.TextBoxFor(x => x.StarDaySearch, new { @class = "datepicker",Value="" })
+                 đến ngày @Html.TextBoxFor(x => x.EndDaySearch, new { @class = "datepicker",Value="" })
+                 <button type="submit" id="btnxembaocao">Xem Báo Cáo</button>
+             </div>    
+         }
+    <div>
+        <table class="table-service">
         <tr>
             <td>
                Phòng
@@ -76,10 +83,28 @@
                     
                 </tr>
     </table>
-        </div>
+</div>
       <div class="search">
           <br><br />
         <h1>Tổng Tiền : @Model.SumPriceReport vnđ</h1> 
       </div>
+
 </div>
-        
+@*
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $('#form2').submit(function () {
+            var SearchModel = {
+                StarDaySearch: $("input[name=fromdate]").val(),
+                EndDaySearch: $("input[name=todate]").val()
+            }
+            $.post('ReportAddmin', SearchModel)
+            .success(function () { return true;})
+               .error(function () { return false;});
+
+            return false;
+
+        });
+    });
+</script>
+*@

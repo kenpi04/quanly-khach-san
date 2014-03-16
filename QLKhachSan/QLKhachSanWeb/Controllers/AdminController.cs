@@ -5,9 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EntityLibrary;
+using QLKhachSanWeb.Helper;
+
 
 namespace QLKhachSanWeb.Controllers
 {
+     [Auth]
     public class AdminController : Controller
     {
         //
@@ -613,30 +616,59 @@ namespace QLKhachSanWeb.Controllers
 
 
         //Bao cao
-        public ActionResult ReportAddmin(DateTime? startDate, DateTime? endDate)
+        public ActionResult ReportAddmin()
         {
             ListReportModel model = new ListReportModel();
-           List<ReportEntity> List = _service.GetReportNowDay();
-           decimal SumPriceReport = 0;
-           foreach (ReportEntity gt in List)
-           {
-               ReportModel team = new ReportModel();
-               team.Rom = gt.Rom;
+            List<ReportEntity> List = _service.GetReportNowDay(null, null);
+            decimal SumPriceReport = 0;
+            foreach (ReportEntity gt in List)
+            {
+                ReportModel team = new ReportModel();
+                team.Rom = gt.Rom;
                 team.Name = gt.Name;
-                team.CMND  =gt.CMND;
-                team.StarDay =gt.StarDay;
+                team.CMND = gt.CMND;
+                team.StarDay = gt.StarDay;
                 team.EndDay = gt.EndDay;
                 team.PriceRom = gt.PriceRom;
                 team.NameService = gt.NameService;
-                team.PriceService =gt.PriceService;
+                team.PriceService = gt.PriceService;
                 team.SumPrice = gt.SumPrice;
                 model.ReportDetail.Add(team);
                 SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
-           }
-           model.SumPriceReport = SumPriceReport.ToString();
+            }
+            model.SumPriceReport = SumPriceReport.ToString();
+            model.StarDaySearch = "";
+            model.EndDaySearch = "";
             return View(model);
         }
-
+        
+        [HttpPost]
+        public ActionResult ReportAddmin(ListReportModel model)
+        {
+            if (model.StarDaySearch == "")
+                model.StarDaySearch = null;
+            if(model.EndDaySearch=="")
+                model.EndDaySearch=null;
+            List<ReportEntity> List = _service.GetReportNowDay(model.StarDaySearch, model.EndDaySearch);
+            decimal SumPriceReport = 0;
+            foreach (ReportEntity gt in List)
+            {
+                ReportModel team = new ReportModel();
+                team.Rom = gt.Rom;
+                team.Name = gt.Name;
+                team.CMND = gt.CMND;
+                team.StarDay = gt.StarDay;
+                team.EndDay = gt.EndDay;
+                team.PriceRom = gt.PriceRom;
+                team.NameService = gt.NameService;
+                team.PriceService = gt.PriceService;
+                team.SumPrice = gt.SumPrice;
+                model.ReportDetail.Add(team);
+                SumPriceReport = SumPriceReport + Convert.ToDecimal(gt.SumPrice);
+            }
+            model.SumPriceReport = SumPriceReport.ToString();
+            return View(model);
+        }
        
     }
 }
