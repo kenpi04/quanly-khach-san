@@ -32,9 +32,13 @@
          </tr>
      }
     <tr>
-        <td>
+        <td></td>
+        <td></td>
+        
+        <td style="color:blue;font-size:18px;text-align:center">
             @if(Model.PageInfo.TotalPages>1)
             {
+                
             <div>Trang:
             @{for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
               {
@@ -42,8 +46,10 @@
               }
             }
             </div>
+                    
             }
         </td>
+        <td></td>
     </tr>
 </table>
  
