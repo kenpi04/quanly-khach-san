@@ -13,8 +13,9 @@ namespace QLKhachSanWeb.Controllers
      [Auth]
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/
+        
+
+        #region Trang cu
 
         ThienGetService123 _service = new ThienGetService123();
 
@@ -47,6 +48,8 @@ namespace QLKhachSanWeb.Controllers
                     return RedirectToAction("XemLog", "Admin");
             }
         }
+
+        #endregion
 
         //Users
         #region Users
@@ -614,8 +617,8 @@ namespace QLKhachSanWeb.Controllers
 
         #endregion
 
-
         //Bao cao
+        #region Xem Bao cao
         public ActionResult ReportAddmin()
         {
             User team1 = KTQUyen();
@@ -680,6 +683,7 @@ namespace QLKhachSanWeb.Controllers
             model.SumPriceReport = SumPriceReport.ToString();
             return View(model);
         }
-       
+        #endregion
+
     }
 }
