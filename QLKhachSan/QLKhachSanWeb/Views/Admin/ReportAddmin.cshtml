@@ -1,21 +1,85 @@
 ﻿@{
-    ViewBag.Title = "ReportAddmin";
     Layout = "~/Views/Shared/_AdminRoot.cshtml";
 }
-    
+@model QLKhachSanWeb.Models.ListReportModel
 <div>
-    <table>
+      <div>
+                  Từ ngày <input type="text" class="datepicker" name="fromdate" /> 
+                  đến ngày <input type="text" class="datepicker" name="todate" />
+                  <button id="btnTimKiem">Xem Báo Cáo</button>
+              </div>
+   
+        <div>
+            <table class="table-service">
         <tr>
             <td>
-                  Từ ngày <input type="text" class="datepicker" name="fromdate" /> 
-                 
+               Phòng
+            </td>
+             <td>
+               Họ và Tên
+            </td>
+             <td>
+               CMND
             </td>
             <td>
-                 đến ngày <input type="text" class="datepicker" name="todate" />
+              Ngày đến
             </td>
-            <td>
-                 <button id="btnXemBaoCao">Xem Báo Cáo</button>
+             <td>
+              Ngày đi
+            </td>
+              <td>
+              Tiền phòng
+            </td>
+             <td>
+              Dịch vụ
+            </td>
+             <td>
+              Tiền dịch vụ
+            </td>
+             <td>
+              Tổng tiền
             </td>
         </tr>
+                @foreach(var team in Model.ReportDetail)
+                {
+                    <tr>
+                        <td>
+                          @team.Rom
+                        </td>
+                         <td>
+                          @team.Name
+                        </td>
+                         <td>
+                           @team.CMND
+                        </td>
+                        <td>
+                          @team.StarDay
+                        </td>
+                         <td>
+                          @team.EndDay
+                        </td>
+                          <td>
+                          @team.PriceRom
+                        </td>
+                         <td>
+                          @team.NameService
+                        </td>
+                         <td>
+                          @team.PriceService
+                        </td>
+                         <td>
+                          @team.SumPrice
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    
+                </tr>
     </table>
+        </div>
+      <div class="search">
+          <br><br />
+        <h1>Tổng Tiền : @Model.SumPriceReport vnđ</h1> 
+      </div>
 </div>
+        
