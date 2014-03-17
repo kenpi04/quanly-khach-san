@@ -144,7 +144,11 @@ $(document).ready(function () {
             
         })
     });
-
+    $(document).on("click", "#btnChangeRoom", function () {
+        var roomId = $("#ddlRoomChange option:selected").val();
+        var bookingId = $("#ddlListBooking option:selected").val();
+        changeRoom(bookingId, roomId);
+    });
     $(document).on("click", "#btnCheckOut", function () {
         $.get("/Booking/CheckOut", function (d) {
             showPopup(d);
@@ -316,6 +320,19 @@ function deleteService(id)
             $("#ddlListBooking").change();
         })
     }
+}
+function changeRoom(bookingId, roomId)
+{
+    $.post("/Booking/ChangeRoom", { bookingId: bookingId, roomChangeId: roomId }, function (d) {
+        if (d.status == 1) {
+            alert(d.mes);
+            $.modal.close();
+            window.location.reload();
+        }
+        else
+            alert(d);
+       
+    })
 }
 
 $(document).on("submit", "form", function (event) {
