@@ -30,8 +30,13 @@
                 </table>
                   <div id="listService"></div>
                 <div class="submit-form">
-                    <input type="button" id="btnPayment" value="Thanh toán"/>
-                    <input type="button" id="btnCancel" value="Bỏ qua"/>
+                    <input type="button" id="btnPayment" value="Thanh toán"/>                    
+                    <input type="button" id="btnCancel" value="Bỏ qua"/><br />
+                    <span>
+                   @Html.DropDownList("roomChange", Model.Rooms, new {id="ddlRoomChange" })
+                    <input type="button" id="btnChangeRoom" value="Chuyển phòng"/>
+                    </span>
                 </div>
+                  
             </div>
      }
