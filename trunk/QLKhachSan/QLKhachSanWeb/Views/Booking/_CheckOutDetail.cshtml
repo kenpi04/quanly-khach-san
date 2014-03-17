@@ -25,6 +25,7 @@
         <th>Số lượng</th>
         <th>Giá</th>
         <th>Tổng</th>
+      
         
     </tr>    
     @for (int i = 0; i < Model.Services.Count;i++ )
@@ -36,6 +37,11 @@
             <td>@item.Quatity.ToString("0.00")</td>
             <td>@String.Format("{0:0,0}",item.Price)</td>
             <td>@String.Format("{0:0,0}", item.Total)</td>
+         
+
+
+        
+            
            
         </tr>
     }
@@ -43,8 +49,7 @@
 </table>
 
 <div class="total">
-    <span>Tiền phòng:@Model.Room.Price</span></br>
     <span>Tổng tiền:@Model.Total</span></div>
 
       </div>
-<div><input type="button" id="btnCancel" value="Đóng" /></div>
+<div class="command"><input type="button" id="btnCancel" value="Đóng" /></div>

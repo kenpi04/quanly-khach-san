@@ -4,6 +4,7 @@
   
   
 <table class="form">
+   @Html.HiddenFor(x => x.AddServiceModel.Id)
     <tr>
         <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.ServiceId)</td>
         <td class="ct">@Html.DropDownListFor(x=>x.AddServiceModel.ServiceId,Model.ServicesList)
@@ -35,7 +36,8 @@
 </table>
 <div class="commanda">
     <input type="submit" id="btnInsertSV" value="Thêm" />
-    
+    <input type="button" id="btnCancelUpDate" value="Bỏ qua" style="display:none" />
+     
 </div>
 
 
@@ -47,24 +49,23 @@
         <th>Số lượng</th>
         <th>Giá</th>
         <th>Tổng</th>
+          <th>Thao tác</th>
         
     </tr>    
     @for (int i = 0; i < Model.Services.Count;i++ )
     { 
         var item=Model.Services[i];
-        <tr>
-            <td>@(i+1)</td>
-            <td>@item.ServiceName</td>
-            <td>@item.Quatity.ToString("0.00")</td>
-            <td>@String.Format("{0:0,0}",item.Price)</td>
-            <td>@String.Format("{0:0,0}", item.Total)</td>
-           
+        <tr id="data-@item.Id">
+            <td data-id="@item.Id">@(i+1)</td>
+            <td data-value="@item.ServiceId">@item.ServiceName</td>
+            <td data-value="@item.Quatity">@item.Quatity.ToString("0.00")</td>
+            <td data-value="@item.Price">@String.Format("{0:0,0}",item.Price)</td>
+            <td data-value="@item.Total">@String.Format("{0:0,0}", item.Total)</td>
+              <td><a href="javascript:loadDataEdit(@item.Id)">Sửa</a>|<a href="javascript:deleteBooking(@item.Id)">Xóa</a></td>
         </tr>
     }
     
 </table>
-<div class="info">
-    <span><b>Loại phòng:</b>@Model.Room.TypeName</span><br />
-    <span><b>Tiền phòng:</b>@String.Format("{0:0,0}",Model.Room.Price)</span><br />
+<div class="info">   
     <span><b>Tổng tiền:</b>@String.Format("{0:0,0}",Model.Total)</span><br />
    </div>
