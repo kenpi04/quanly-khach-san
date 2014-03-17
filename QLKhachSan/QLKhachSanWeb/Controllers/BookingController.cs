@@ -34,7 +34,7 @@ namespace QLKhachSanWeb.Controllers
         public ActionResult BookRoom(BookingModel model)
         {
            
-            if (_service.CheckRoomContent(model.BookingInfo.RoomId, model.BookingInfo.CheckingDate) || _service.CheckRoomContent(model.BookingInfo.RoomId, model.BookingInfo.CheckingDate))
+            if (_service.CheckRoomContent(model.BookingInfo.RoomId, model.BookingInfo.CheckingDate) || _service.CheckRoomContent(model.BookingInfo.RoomId, model.BookingInfo.CheckOutDate))
                 return Json("Phòng đã có người đặt");
             var entity = new BookingInfo
             {
@@ -293,12 +293,58 @@ namespace QLKhachSanWeb.Controllers
 
         }
         [HttpPost]
-        public ActionResult ChangeRoom(int booking1,int roomChange)
+        public ActionResult ChangeRoom(int bookingId,int roomChangeId)
         {
-            var booking = _service.GetBookingInforById(booking1);
+            var booking = _service.GetBookingInforById(bookingId);            
             if (booking == null)
                 return Json("Thông tin không tồn tại!");
-            var roomChan = _service.GetRoomById(roomChange);
+            if (_service.CheckRoomContent(roomChangeId, booking.CheckingDate.Value) || _service.CheckRoomContent(roomChangeId, booking.CheckOutDate.Value))
+                return Json("Phòng đã có người đặt");
+            booking.HasChangeRoom=true;
+            booking.StatusId = (int)BookingInfoStatusEnums.PhongDaCheckOut;
+          int i=  _service.UpdateBookingInfo(booking);
+           if(i==0)
+               return Json("Cập nhật thông tin booking không thành công!");
+           var roomChan = _service.GetRoomById(roomChangeId);
+            var newBooking = new BookingInfo { 
+                FromBookingInfoId=booking.Id,
+                BookingDate=DateTime.Now,
+                CheckingDate=DateTime.Now,
+                CheckOutDate=booking.CheckOutDate,
+                CustomerName=booking.CustomerName,
+                CustomerCardNo=booking.CustomerCardNo,
+                CustomerInfoOther=booking.CustomerInfoOther,
+                PhoneNumber=booking.PhoneNumber,
+                UserId=((User)Session["SessionUser"]).Id,
+                RoomId = roomChangeId,
+                LastUpdateDate=DateTime.Now,
+               
+            };
+        i=  _service.InsertBookingInfo(newBooking);
+          if (i == 0)
+              return Json("Thêm mới không thành công!");
+          var newBookAfterInser = _service.GetListBookingInfoByRoomId(roomChangeId).FirstOrDefault(x => x.FromBookingInfoId == booking.Id);
+          var bookingDetailNew = new BookingInfoDetail
+          {
+              BookingInfoId=newBookAfterInser.Id,
+              Price=roomChan.Price,
+              Quatity=1,
+              ServiceId=roomChan.Id,
+              ServiceName=roomChan.Name,
+              Total=roomChan.Price
+              
+          };
+          i = _service.InsertBookingInfoDetail(bookingDetailNew);
+          if (i == 0)          
+              return Json("Thêm thông tin mới ko thành công");
+          string action = string.Format("Chuyển khách {0} từ {1} đến {2}",booking.CustomerName,_service.GetRoomById(booking.RoomId).Name,roomChan.Name);
+          _service.WriteLogAction(action, ((User)Session["SessionUser"]).Id);
+            return Json(new
+            {
+               status=1,
+               mes = "Chuyển đến " + roomChan.Name + " thành công!"
+            });
+
 
         }
        
