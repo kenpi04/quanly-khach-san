@@ -124,7 +124,7 @@ namespace EntityLibrary
                team.FromBookingInfoId = model.FromBookingInfoId;
                team.UserId = model.UserId;
                team.CreatedDate = model.CreatedDate;
-               team.LastUpdateDate = model.LastUpdateDate;
+               team.LastUpdateDate = DateTime.Now;
                team.StatusId = model.StatusId;
                team.Deleted = model.Deleted;
 
