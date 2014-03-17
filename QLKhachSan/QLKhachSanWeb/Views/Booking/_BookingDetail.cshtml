@@ -1,5 +1,17 @@
 ﻿@model EntityLibrary.BookingInfo
-
+@{
+    string tinhtran = "";
+   switch(Model.StatusId)
+   {
+       case 1: tinhtran="Đặt phòng đảm bảo";
+        break;
+       case 2: tinhtran = "Đặt phòng không đảm bảo";
+        break;
+       case 3: tinhtran = "Phòng đang ở";
+        break;
+   }
+   
+    }
 <div class="tooltip">
     <span>Tên: @Model.CustomerName</span><br />
     <span>SĐT:@Model.PhoneNumber</span><br />
@@ -7,7 +19,7 @@
     <span>Ngày đặt:@Model.BookingDate.Value.ToString("dd/MM/yyyy")</span><br />
     <span>Ngày nhận phòng :@Model.CheckingDate.Value.ToString("dd/MM/yyyy")</span><br />
      <span>Ngày trả phòng :@Model.CheckOutDate.Value.ToString("dd/MM/yyyy")</span><br />
-   
+   <span>Loại: @tinhtran</span>
    
     
 </div>

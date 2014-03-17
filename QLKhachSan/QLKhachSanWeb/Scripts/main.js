@@ -91,9 +91,10 @@ $(document).ready(function () {
     })
     $(document).on("mouseenter", "#simplemodal-overlay", function () { UnTip(); })
     $(document).on("change", "#ddlRoom", function () {
+        var isDango = $(this).attr("name") == "Room";
         var ddlbooking = $("#ddlListBooking");
         ddlbooking.html("");
-        $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val() }, function (d) {
+        $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val(),dango:isDango }, function (d) {
 
             if (d.length > 0)           {
               
@@ -106,8 +107,10 @@ $(document).ready(function () {
         })
     })
     $(document).on("change", "#ddlListBooking", function () {
-        $.get("/Booking/RoomDetail/" + $(this).find("option:selected").val(), function (d) {
+        $("#detail").html("");
+        $.get("/Booking/Detail/" + $(this).find("option:selected").val(), function (d) {
             $("#detail").html(d);
+           
         })
     })
     $(document).on("change", ".showbooking", function () {
@@ -118,7 +121,7 @@ $(document).ready(function () {
         })
     })
     $(document).on("click","#btnChangeStatus",function(){
-        changeStatus($("#ddlRoom option:selected").val(),3,false);
+        changeStatus($("#ddlListBooking option:selected").val(),3,false);
     })
   
     $(document).on("change", "#AddServiceModel_ServiceId", function () {
@@ -245,9 +248,19 @@ $(document).ready(function () {
       
         changeStatus($(this).attr("roomid"), $(this).find("option:selected").val(),true);
     });
+    $(document).on("click", "#btnCancelUpDate", function () {
+      
+        resetForm();
+    })
 
 
 })
+function resetForm()
+{
+    $("#AddServiceModel_Id").val("");
+    $("#btnInsertSV").val("Thêm");
+    $("#btnCancelUpdate").hide();
+}
 function Payment()
 {
     var id = $("#ddlListBooking option:selected").val();
@@ -284,6 +297,27 @@ function changeStatus(id, status,select)
         window.location.reload();
     })
 }
+function loadDataEdit(id)
+{
+    var td = $("#data-" + id);
+    $("#AddServiceModel_Id").val(id);
+    $("#AddServiceModel_ServiceId").val($("td:eq(1)", td).attr("data-value"));
+    $("#AddServiceModel_Quatity").val($("td:eq(2)", td).attr("data-value"));
+    $("#AddServiceModel_Price").val($("td:eq(3)", td).attr("data-value"));
+    $("#AddServiceModel_Total").val($("td:eq(4)", td).attr("data-value"));
+    $("#btnInsertSV").val("Cập nhật");
+    $("#btnCancelUpdate").show();
+}
+function deleteService(id)
+{
+    if (confirm("Bạn có chắc xóa ?")) {
+        $.post("/Booking/DeleteService", { id: id }, function (d) {
+            alert(d);
+            $("#ddlListBooking").change();
+        })
+    }
+}
+
 $(document).on("submit", "form", function (event) {
     var form = $(this);
     var id = form.attr("id");
@@ -304,8 +338,12 @@ $(document).on("submit", "form", function (event) {
                 if (d == "success") {
                     if (id == "frmInsertService")
                     {
-                        $("#simplemodal-container").css("top","10px")
-                        alert("Thêm thành công!");
+                        if ($("#AddServiceModel_Id").val() != "") {
+                            alert("Cập nhật thành công!");
+                            resetForm();
+                        }
+                        else
+                            alert("Thêm thành công!");
                         $("#ddlListBooking").change();
                         return;
                     }

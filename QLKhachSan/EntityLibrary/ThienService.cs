@@ -155,6 +155,19 @@ namespace EntityLibrary
                  
                   
        }
+       public int DeleteBookingInfoDetail(BookingInfoDetail entity)
+       {
+           try
+           {
+               db.BookingInfoDetails.Remove(entity);
+               db.SaveChanges();
+               return 1;
+           }
+           catch
+           {
+            return 0;
+           }
+       }
 
        public int InsertBookingInfoDetail(BookingInfoDetail model)
        {
