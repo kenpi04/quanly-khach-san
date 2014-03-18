@@ -47,21 +47,21 @@
                      <tr>
                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.CheckingDate):</td>
                         <td class="ct">
-                            @Html.TextBoxFor(x => x.BookingInfo.CheckingDate, new { @class = "datepicker",Value="" })
+                            @Html.TextBoxFor(x => x.BookingInfo.CheckingDate, new { @class = "datepicker",Value="",@readonly="readonly" })
                             @Html.ValidationMessageFor(x => x.BookingInfo.CheckingDate)
                         </td>
                     </tr>
                      <tr>
                        <td class="lb">@Html.LabelFor(x => x.BookingInfo.CheckOutDate):</td>
                         <td class="ct">
-                            @Html.TextBoxFor(x => x.BookingInfo.CheckOutDate, new { @class = "datepicker",Value="" })
+                            @Html.TextBoxFor(x => x.BookingInfo.CheckOutDate, new { @class = "datepicker",Value="",@readonly="readonly" })
                             @Html.ValidationMessageFor(x => x.BookingInfo.CheckOutDate)
                         </td>
                     </tr>
                        <tr>
                         <td class="lb">@Html.LabelFor(x => x.BookingInfo.CustomerInfoOther):</td>
                         <td class="ct">
-                            @Html.EditorFor(x => x.BookingInfo.CustomerInfoOther)
+                            @Html.TextAreaFor(x => x.BookingInfo.CustomerInfoOther)
                             @Html.ValidationMessageFor(x => x.BookingInfo.CustomerInfoOther)
                         </td>
                     </tr>

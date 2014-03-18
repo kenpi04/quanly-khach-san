@@ -80,7 +80,7 @@ function search(isToday)
     })
 }
 $(function () {
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
     initSize();
 });
 $(document).ready(function () {
@@ -94,6 +94,7 @@ $(document).ready(function () {
         var isDango = $(this).attr("name") == "Room";
         var ddlbooking = $("#ddlListBooking");
         ddlbooking.html("");
+        $("#detail").html("");
         $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val(),dango:isDango }, function (d) {
 
             if (d.length > 0)           {
@@ -141,7 +142,7 @@ $(document).ready(function () {
     $(document).on("click","#btnCheckIn",function(){
         $.get("/Booking/CheckIn",function(d){
             showPopup(d);
-            
+            $("#ddlRoom").change();
         })
     });
     $(document).on("click", "#btnChangeRoom", function () {
@@ -193,7 +194,7 @@ $(document).ready(function () {
         $.get("/Booking/BookRoom", function (d) {
 
             showPopup(d);
-            $(".datepicker").datepicker({format:"dd/MM/yyyy"});
+            $(".datepicker").datepicker({dateFormat:"dd/mm/yy"});
         })
     })
     $(document).on("click","#btnPayment",function () {
@@ -326,8 +327,12 @@ function changeRoom(bookingId, roomId)
     $.post("/Booking/ChangeRoom", { bookingId: bookingId, roomChangeId: roomId }, function (d) {
         if (d.status == 1) {
             alert(d.mes);
-            $.modal.close();
-            window.location.reload();
+           // $.modal.close();
+            //window.location.reload();
+            Payment();
+
+
+
         }
         else
             alert(d);
