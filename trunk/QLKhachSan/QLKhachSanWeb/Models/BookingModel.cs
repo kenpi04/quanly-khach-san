@@ -33,18 +33,18 @@ namespace QLKhachSanWeb.Models
           public string PhoneNumber { get; set; }
           [Display(Name = "Thông tin khác")]
           public string CustomerInfoOther { get; set; }
-
+          
+        
           public DateTime BookingDate { get; set; }
 
           [Display(Name = "Ngày nhận phòng")]
           [Required(ErrorMessage = "Nhập ngày nhận phòng")]
-   
-          public DateTime CheckingDate { get; set; }
+         
+          public string CheckingDate { get; set; }
 
           [Display(Name = "Ngày trả phòng")]
-          [Required(ErrorMessage = "Nhập ngày trả phòng")]
-         
-          public DateTime CheckOutDate { get; set; }
+          [Required(ErrorMessage = "Nhập ngày trả phòng")]         
+          public string CheckOutDate { get; set; }
           [Display(Name = "Phòng")]
           public int RoomId { get; set; }
 
