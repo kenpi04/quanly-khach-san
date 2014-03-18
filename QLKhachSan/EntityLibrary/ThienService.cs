@@ -75,7 +75,12 @@ namespace EntityLibrary
 
 
        #region BookingInfor
-      
+
+       public IList<BookingInfo> GetList()
+       {
+           var q = db.BookingInfoes;           
+           return q.ToList();
+       }
        public IList<BookingInfo> GetListBookingInfoByRoomId(int roomId)
        { 
         var q=from b in db.BookingInfoes 
