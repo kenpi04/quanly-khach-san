@@ -119,9 +119,11 @@
     <Compile Include="Models\CheckOutModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ListBookingModel.cs" />
+    <Compile Include="Models\ListReportModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LogModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\ServiceTypeModel.cs" />

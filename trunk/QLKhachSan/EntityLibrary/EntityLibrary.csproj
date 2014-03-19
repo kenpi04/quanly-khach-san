@@ -72,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLKhachSanEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ReportEntity.cs" />
     <Compile Include="Service.cs">
       <DependentUpon>QLKhachSanEntity.tt</DependentUpon>
     </Compile>
