@@ -3,17 +3,17 @@
 }
 @model QLKhachSanWeb.Models.ListLogModel
      <script src="~/Scripts/thienmain.js"></script>
-@*
+
   @using (Html.BeginForm())
        {
         <div>
                
-                 Từ ngày @Html.TextBoxFor(x => x.StarDaySearch, new { @class = "datepicker",Value="" })
-                 đến ngày @Html.TextBoxFor(x => x.EndDaySearch, new { @class = "datepicker",Value="" })
+                 Từ ngày @Html.TextBoxFor(x => x.StarDaySearch, new { @class = "datepicker"})
+                 đến ngày @Html.TextBoxFor(x => x.EndDaySearch, new { @class = "datepicker"})
                  <button type="submit" id="btnxembaocao">Tìm kiếm</button>
              </div>    
          }
-*@
+
 
 <table class="table-service">
     <tr>
@@ -42,7 +42,7 @@
             <div>Trang:
             @{for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
               {
-                <a href="@Url.Action("XemLog","Admin", new { page=@i})">@i</a>
+                <a href="@Url.Action("XemLog","Admin", new { page=@i,StarDaySearch=@Model.StarDaySearch,EndDaySearch=@Model.EndDaySearch})">@i</a>
               }
             }
             </div>
