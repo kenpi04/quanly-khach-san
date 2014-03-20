@@ -332,7 +332,7 @@ namespace EntityLibrary
        public bool CheckRoomContent(int roomId, DateTime date)
        {
            var q = from b in db.BookingInfoes
-                   where b.StatusId !=(int)BookingInfoStatusEnums.PhongDaCheckOut && b.RoomId == roomId
+                   where b.StatusId == (int)BookingInfoStatusEnums.PhongDangO || b.StatusId == (int)BookingInfoStatusEnums.DamBao || b.StatusId == (int)BookingInfoStatusEnums.KoDamBao && b.RoomId == roomId
                    && b.CheckingDate <=date && b.CheckOutDate >= date
                    select b;
            bool a = q.Count() > 0;
