@@ -201,7 +201,7 @@ namespace QLKhachSanWeb.Controllers
         //Logs
         #region Xem Logs
 
-        public ActionResult XemLog(int? page)
+        public ActionResult XemLog(int? page, string StarDaySearch, string EndDaySearch)
         {
             int size = Convert.ToInt32(page);
             User team1 = KTQUyen();
@@ -214,7 +214,7 @@ namespace QLKhachSanWeb.Controllers
                 else
                 {
                     List<LogModel> model = new List<LogModel>();
-                    var listLog = _service.GetListLog();
+                    var listLog = _service.GetListLog(StarDaySearch,EndDaySearch);
                     foreach (Log lg in listLog)
                     {
                         LogModel team = new LogModel();
@@ -226,7 +226,12 @@ namespace QLKhachSanWeb.Controllers
                         team.CreateDate = lg.CreatedDate.ToString();
                         model.Add(team);
                     }
-
+                    int item = 25;
+                    if (model.Count() == 0)
+                    {
+                        size = 1;
+                        item = 1;
+                    }
                     ListLogModel modelview = new ListLogModel()
                     {
                         ListLogs = model
@@ -235,10 +240,12 @@ namespace QLKhachSanWeb.Controllers
                         PageInfo = new PageInfo
                         {
                             CurrentPage = size,
-                            ItemsPerPage = 25,
+                            ItemsPerPage = item,
                             TotalItems = model.Count()
                         }
                     };
+                   modelview.StarDaySearch = StarDaySearch;
+                   modelview.EndDaySearch = EndDaySearch;
 
                     return View(modelview);
                 }
@@ -247,11 +254,6 @@ namespace QLKhachSanWeb.Controllers
         [HttpPost]
         public ActionResult XemLog(ListLogModel modelview)
         {
-           
-            if (modelview.StarDaySearch == "")
-                modelview.StarDaySearch = null;
-            if (modelview.EndDaySearch == "")
-                modelview.EndDaySearch = null;
             List<LogModel> model = new List<LogModel>();
             var listLog = _service.GetListLog(modelview.StarDaySearch,modelview.EndDaySearch);
             foreach (Log lg in listLog)
@@ -265,19 +267,26 @@ namespace QLKhachSanWeb.Controllers
                 team.CreateDate = lg.CreatedDate.ToString();
                 model.Add(team);
             }
-            int size = 1;
+            int size = 1;;
+            int item = 25;
+            if (model.Count()==0)
+            {
+                item = 1;
+            }
             ListLogModel modelview1 = new ListLogModel()
             {
                 ListLogs = model
-                .Skip((size - 1) * model.Count())
-                .Take(model.Count()),
+                .Skip((size - 1) * 25)
+                .Take(25),
                 PageInfo = new PageInfo
                 {
                     CurrentPage = size,
-                    ItemsPerPage = model.Count(),
+                    ItemsPerPage = item,
                     TotalItems = model.Count()
                 }
             };
+            modelview1.StarDaySearch = modelview.StarDaySearch;
+            modelview1.EndDaySearch = modelview.EndDaySearch;
             return View(modelview1);
         }
 
