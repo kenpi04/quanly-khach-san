@@ -3,7 +3,7 @@
     $("#popup").html(str);
     UnTip();
     $.validator.unobtrusive.parse($('form')[0]);
-
+    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
 }
 function showToolTip(strHTML) {
     Tip(strHTML, WIDTH, 300, ABOVE, true);
@@ -89,16 +89,22 @@ $(document).ready(function () {
     }).ajaxComplete(function () {
         $(".div-loading").hide();
     })
+    $(document).on("blur", "#filterDate", function () {
+        $("#ddlRoom").change();
+    })
     $(document).on("mouseenter", "#simplemodal-overlay", function () { UnTip(); })
     $(document).on("change", "#ddlRoom", function () {
         var isDango = $(this).attr("name") == "Room";
+        var isAll = $(this).attr("class") == "ddlRoomDestroy";
         var ddlbooking = $("#ddlListBooking");
+        var date = "";
+        if ($("#filterDate"))
+            date = $("#filterDate").val();
         ddlbooking.html("");
         $("#detail").html("");
-        $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val(),dango:isDango }, function (d) {
+        $.get("/Booking/GetListBookingInfo", { roomId: $(this).find("option:selected").val(),dango:isDango,filterdate:date,all:isAll }, function (d) {
 
-            if (d.length > 0)           {
-              
+            if (d.length > 0)           {              
                
                 $.each(d, function (i, e) {
                     ddlbooking.append($("<option/>").html(e.Text).val(e.Value));
@@ -127,7 +133,7 @@ $(document).ready(function () {
   
     $(document).on("change", "#AddServiceModel_ServiceId", function () {
         $.get("/Booking/GetPrice", {serviceId:$(this).find("option:selected").val()},function(d){
-            $("#AddServiceModel_Price").val(d);
+            $("#AddServiceModel_Price").val(formatnumber(d));
             calculatorPrice();
         })
        
@@ -145,10 +151,19 @@ $(document).ready(function () {
             $("#ddlRoom").change();
         })
     });
+    $(document).on("click","#btnHuy",function(){
+        $.get("/Booking/DeletedBooking",function(d){
+            showPopup(d);
+            $("#ddlRoom").change();
+        })
+    });
+  
     $(document).on("click", "#btnChangeRoom", function () {
-        var roomId = $("#ddlRoomChange option:selected").val();
-        var bookingId = $("#ddlListBooking option:selected").val();
-        changeRoom(bookingId, roomId);
+        if (confirm("Bạn có chắc đổi phòng không?")) {
+            var roomId = $("#ddlRoomChange option:selected").val();
+            var bookingId = $("#ddlListBooking option:selected").val();
+            changeRoom(bookingId, roomId);
+        }
     });
     $(document).on("click", "#btnCheckOut", function () {
         $.get("/Booking/CheckOut", function (d) {
@@ -156,6 +171,29 @@ $(document).ready(function () {
             $("#ddlRoom").change();
         })
     });
+    $(document).on("click", "#btnDeleteBooking", function () {
+        if(confirm("Bạn có chắc xóa thông tin?"))
+        {
+            var id=$("#ddlListBooking option:selected").val();
+            var note=$("#deletedNote").val();
+            if(note.length<10)
+            {
+                alert("Vui lòng nhập lý do hủy!");
+                return;
+            }
+            $.post("/Booking/DeleteBookingAction", { id: id, note: note }, function (d) {
+                if(d=="success")
+                {
+                    alert("Xóa thành công!");
+                    window.location.reload();
+                }
+                else
+                    alert(d);
+            })
+
+
+        }
+    })
 
     $(document).on("click","#btnTimKiem", function () {
         search(false);
@@ -192,13 +230,13 @@ $(document).ready(function () {
     });
     $("#btnDatPhong").bind("click",function () {
         $.get("/Booking/BookRoom", function (d) {
-
-            showPopup(d);
-            $(".datepicker").datepicker({dateFormat:"dd/mm/yy"});
+            showPopup(d);          
         })
     })
-    $(document).on("click","#btnPayment",function () {
-        Payment();
+    $(document).on("click", "#btnPayment", function () {
+        if (confirm("Bạn có chắc thanh toán phòng này?")) {
+            Payment();
+        }
     })
     $("#btnXemLog").bind("click", function () {
         $.get("/Admin/AddUsers", function (d) {
@@ -264,7 +302,8 @@ function resetForm()
 {
     $("#AddServiceModel_Id").val("");
     $("#btnInsertSV").val("Thêm");
-    $("#btnCancelUpdate").hide();
+    $("#btnCancelUpDate").hide();
+    $(".submit-form").show();
 }
 function Payment()
 {
@@ -286,7 +325,7 @@ function Payment()
 function calculatorPrice()
 {
     var quatity = parseInt($("#AddServiceModel_Quatity").val());
-    var price = parseInt($("#AddServiceModel_Price").val());
+    var price = parseInt(getNumber($("#AddServiceModel_Price").val()));
     $("#AddServiceModel_Total").val(quatity * price);
 }
 function changeStatus(id, status,select)
@@ -311,7 +350,9 @@ function loadDataEdit(id)
     $("#AddServiceModel_Price").val($("td:eq(3)", td).attr("data-value"));
     $("#AddServiceModel_Total").val($("td:eq(4)", td).attr("data-value"));
     $("#btnInsertSV").val("Cập nhật");
-    $("#btnCancelUpdate").show();
+    $("#btnCancelUpDate").show();
+    $("#AddServiceModel_ServiceId").attr("disabled", "disabled");
+    $(".submit-form").hide();
 }
 function deleteService(id)
 {
@@ -385,6 +426,22 @@ $(document).on("submit", "form", function (event) {
 
     event.preventDefault();
 });
+function formatnumber(strvalue) {
+    var num;
+    num = strvalue.toString().replace(/\$|\,/g, '');
+    if (isNaN(num))
+        num = "";
+    sign = (num == (num = Math.abs(num)));
+    num = Math.floor(num * 100 + 0.50000000001);
+    num = Math.floor(num / 100).toString();
+    for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' +
+       num.substring(num.length - (4 * i + 3));
+    return (((sign) ? '' : '-') + num);
+}
+function getNumber(number){
+    return parseInt(number.replace(/[^0-9\.]+/g, ''));
+}
 var ROOM_STATUS = [
     /// dat phong dam bao
     /// </summary>

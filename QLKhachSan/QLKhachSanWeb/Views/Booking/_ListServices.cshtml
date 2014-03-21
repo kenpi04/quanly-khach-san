@@ -17,20 +17,20 @@
         <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Quatity)
                @Html.ValidationMessageFor(x=>x.AddServiceModel.Quatity)
         </td>
-    </tr>
-       <tr>
-        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Note)</td>
-        <td class="ct">@Html.TextAreaFor(x=>x.AddServiceModel.Note)</td>
-    </tr>
+    </tr>      
       <tr>
         <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Price)</td>
-        <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Price)</td>
+        <td class="ct">@Html.TextBoxFor(x => x.AddServiceModel.Price)</td>
     </tr>
       <tr>
         <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Total)</td>
         <td class="ct">@Html.EditorFor(x=>x.AddServiceModel.Total)
               @Html.ValidationMessageFor(x=>x.AddServiceModel.Total)
         </td>
+    </tr>
+     <tr>
+        <td class="lb">@Html.LabelFor(x=>x.AddServiceModel.Note)</td>
+        <td class="ct">@Html.TextAreaFor(x=>x.AddServiceModel.Note)</td>
     </tr>
  
 </table>
@@ -41,8 +41,8 @@
 </div>
 
 
-
-<table class="table-service">
+<div class="div-scroll">
+    <table class="table-service">
     <tr>
         <th>STT</th>
         <th>Tên</th>
@@ -61,11 +61,13 @@
             <td data-value="@item.Quatity">@item.Quatity.ToString("0.00")</td>
             <td data-value="@item.Price">@String.Format("{0:0,0}",item.Price)</td>
             <td data-value="@item.Total">@String.Format("{0:0,0}", item.Total)</td>
-              <td><a href="javascript:loadDataEdit(@item.Id)">Sửa</a>|<a href="javascript:deleteBooking(@item.Id)">Xóa</a></td>
+              <td><a href="javascript:loadDataEdit(@item.Id)">Sửa</a>|<a href="javascript:deleteService(@item.Id)">Xóa</a></td>
         </tr>
     }
     
 </table>
+    </div>
+
 <div class="info">   
     <span><b>Tổng tiền:</b>@String.Format("{0:0,0}",Model.Total)</span><br />
    </div>

@@ -35,6 +35,8 @@ namespace QLKhachSanWeb.Controllers
         {
             var dateChecking = Convert.ToDateTime(model.BookingInfo.CheckingDate);
             var dateCheckOut = Convert.ToDateTime(model.BookingInfo.CheckOutDate);
+            if (dateChecking > dateCheckOut)
+                return Json("Ngày checking phải nhỏ hơn ngày checkout");
             if (_service.CheckRoomContent(model.BookingInfo.RoomId, dateChecking) || _service.CheckRoomContent(model.BookingInfo.RoomId,dateCheckOut))
                 return Json("Phòng đã có người đặt");
             var entity = new BookingInfo
@@ -96,8 +98,7 @@ namespace QLKhachSanWeb.Controllers
             var entity = _service.GetBookingInforById(id);
             if (entity == null)
                 return 0;
-            entity.StatusId =(short)status;
-            _service.UpdateBookingInfo(entity);
+           
             var room = _service.GetRoomById(entity.RoomId);
             var bookingDetail = new BookingInfoDetail
             {
@@ -110,6 +111,10 @@ namespace QLKhachSanWeb.Controllers
                 ServiceName=room.Name
                
             };
+            entity.StatusId = (int)BookingInfoStatusEnums.PhongDangO;
+            entity.CheckingDate = DateTime.Now;
+            entity.LastUpdateDate = DateTime.Now;
+            _service.UpdateBookingInfo(entity);
             _service.InsertBookingInfoDetail(bookingDetail);
             string action=string.Format("Khách {0} đến nhận phòng {1}",entity.CustomerName,_service.GetRoomById(entity.RoomId).Name);
             _service.WriteLogAction(action, ((User)Session["SessionUser"]).Id);
@@ -123,11 +128,18 @@ namespace QLKhachSanWeb.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult GetListBookingInfo(int roomId,bool dango=false)
+        public ActionResult GetListBookingInfo(int roomId, bool dango = false,bool all=false, string filterdate="")
         {
             var model=new List<SelectListItem>();
-            if(!dango)
-             model = _service.GetListBookingInfoByRoomId(roomId).Where(y=>y.StatusId==(int)BookingInfoStatusEnums.DamBao||y.StatusId==(int)BookingInfoStatusEnums.KoDamBao).Select(x => new SelectListItem { Text = x.CustomerName, Value = x.Id.ToString() }).ToList();
+            var datefilter = DateTime.Now;
+            if (!string.IsNullOrWhiteSpace(filterdate))
+            {
+                //datefilter = Convert.ToDateTime(filterdate);
+            }
+            if (all)
+                model = _service.GetListBookingInfoByRoomId(roomId).Where(x => x.StatusId != (int)BookingInfoStatusEnums.PhongDaCheckOut).Select(x => new SelectListItem { Text = x.CustomerName, Value = x.Id.ToString() }).ToList();
+           else if(!dango)
+             model = _service.GetListBookingInfoByRoomId(roomId).Where(y=>(y.StatusId==(int)BookingInfoStatusEnums.DamBao||y.StatusId==(int)BookingInfoStatusEnums.KoDamBao)).Select(x => new SelectListItem { Text = x.CustomerName, Value = x.Id.ToString() }).ToList();
             else
                 model = _service.GetListBookingInfoByRoomId(roomId).Where(y => y.StatusId == (int)BookingInfoStatusEnums.PhongDangO).Select(x => new SelectListItem { Text = x.CustomerName, Value = x.Id.ToString() }).ToList();
             return Json(model,JsonRequestBehavior.AllowGet);
@@ -353,6 +365,25 @@ namespace QLKhachSanWeb.Controllers
 
 
         }
+        public ActionResult DeletedBooking()
+        {
+            var model = new CheckInModel();
+            model.Rooms = _service.GetRooms().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult DeleteBookingAction(int id, string note)
+        {
+            var booking = _service.GetBookingInforById(id);
+            if (booking == null)
+                return Json("Không tìm thấy thông tin!");
+            booking.Deleted = true;
+           int i= _service.UpdateBookingInfo(booking);
+           if (i != 0)
+               return Json("success");
+           return Json("Lỗi không thành công!");
+        }
+      
        
         
 
