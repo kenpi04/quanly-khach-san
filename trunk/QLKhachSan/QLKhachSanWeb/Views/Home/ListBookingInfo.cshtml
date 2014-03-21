@@ -2,6 +2,7 @@
 <table class="table-data">
     @{
         double dateDiff = (Model.DateEnd - Model.DateStart).TotalDays;
+        int temp = 0;
         }
     @for (int i = -1; i < Model.Rooms.Count; i++)
     {
@@ -28,6 +29,7 @@
             else
             {
                 var room = Model.Rooms[i];
+               
                 if (j == 0)
                 {
                     <td class="room" id="@room.Id">@room.Name</td>
@@ -36,10 +38,12 @@
                 {
                     var check =room.BookingInfo.Where(x => x.StartDate.Day <= now.Day && x.EndDate.Day >= now.Day).FirstOrDefault();
                     <td @(now.Day==DateTime.Now.Day?"today":"") @(check!=null?"id="+check.Id+" status="+check.TypeId:"")>
-                        @if(check!=null)
-                        {
-                            @check.CustomerName
-                        }
+                    @if(check!=null)
+                    {
+                            @Html.Raw(check.CustomerName)
+                            temp = check.Id;
+                     
+                     }
                     </td>
                 }
             }

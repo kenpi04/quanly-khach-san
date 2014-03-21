@@ -1,5 +1,5 @@
 ﻿@model QLKhachSanWeb.Models.CheckInModel
-<h1>Đăng ký nhận phòng</h1>
+<h1>Hủy đăng ký</h1>
            
             
                  <div class="pcontent">
@@ -7,10 +7,10 @@
                     <tr>
                         <td class="lb">Phòng:</td>
                         <td class="ct">
-                           @Html.DropDownList("d", Model.Rooms, new {id="ddlRoom" })
+                           @Html.DropDownList("d", Model.Rooms, new {id="ddlRoom",@class="ddlRoomDestroy" })
                         </td>
                     </tr>
-                    @* <tr>
+                     @*<tr>
                         <td class="lb">Ngày checkin:</td>
                         <td class="ct">
                          <input type="text"  id="filterDate" class="datepicker" />
@@ -28,11 +28,18 @@
                            
                         </td>
                     </tr>
+              
+                        <tr>
+                       <td class="lb">Lý do hủy:</td>
+                        <td class="ct">
+                         <textarea id="deletedNote"></textarea>
+                        </td>
+                    </tr>
                   
               
                 </table>
                 <div class="submit-form">
-                    <input type="submit" id="btnChangeStatus" value="Check In"/>
+                    <input type="button" id="btnDeleteBooking" value="Hủy/Xóa"/>
                     <input type="button" id="btnCancel" value="Bỏ qua"/>
                 </div>
             </div>

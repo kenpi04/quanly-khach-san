@@ -36,7 +36,7 @@ ul {list-style:none }
 .content {margin-top: 86px; }
 .clearboth {clear:both }
 .command {width:940px;margin:0 auto }
-.command li{width:20%;float:left;text-align:center }
+.command li{width:15%;float:left;text-align:center }
 .search {float:right;margin-right:6px }
 .table-data {border:solid 2px  #cccccc ;width:100%;font-size:16px}
 .table-data td {text-align:center }
@@ -114,10 +114,11 @@ margin: 0 auto;line-height: 36px;}
 .table-service tr:first-child {background:#cccccc;font-weight:bold }
 .div-loading {position:absolute;left:0;top:0;background:url(images/ajax-loader.gif) no-repeat;width:42px;height:42px;z-index:1000000;display:none }
 
-.info {line-height:24px }
+.info {line-height:24px;text-align:right }
+.info span {color:#d41212 }
 .admin-form {width:600px;margin:10px auto;font-size:14px}
 .admin-form h1 {color:#d41212;font-size:16px;text-align:center }
 .admin-form table {width:100%; }
 .admin-form table tr td:first-child{font-weight:bold }
 .admin-form .cmd {text-align:center }
-
+.div-scroll {max-height:200px;overflow-x:scroll }

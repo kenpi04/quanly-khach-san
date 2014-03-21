@@ -13,13 +13,15 @@
    
     }
 <div class="tooltip">
-    <span>Tên: @Model.CustomerName</span><br />
-    <span>SĐT:@Model.PhoneNumber</span><br />
-     <span>CMND:@Model.CustomerCardNo</span><br />
-    <span>Ngày đặt:@Model.BookingDate.Value.ToString("dd/MM/yyyy")</span><br />
-    <span>Ngày nhận phòng :@Model.CheckingDate.Value.ToString("dd/MM/yyyy")</span><br />
-     <span>Ngày trả phòng :@Model.CheckOutDate.Value.ToString("dd/MM/yyyy")</span><br />
-   <span>Loại: @tinhtran</span>
+    <span><b>Tên: </b> @Model.CustomerName</span><br />
+    <span><b>SĐT: </b> @Model.PhoneNumber</span><br />
+     <span><b>CMND: </b> @Model.CustomerCardNo</span><br />
+    <span><b>Ngày đặt: </b> @Model.BookingDate.Value.ToString("dd/MM/yyyy")</span><br />
+    <span><b>Ngày nhận phòng: </b> @Model.CheckingDate.Value.ToString("dd/MM/yyyy")</span><br />
+     <span><b>Ngày trả phòng: </b>@Model.CheckOutDate.Value.ToString("dd/MM/yyyy")</span><br />
+   <span><b>Loại:</b> @tinhtran</span><br />
+    <span><b>Thông tin khác:</b> @Model.CustomerInfoOther</span>
+
    
     
 </div>

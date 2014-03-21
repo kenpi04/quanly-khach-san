@@ -38,12 +38,14 @@ namespace QLKhachSanWeb.Models
             [Required(ErrorMessage="Chọn dịch vụ")]
             public int ServiceId { get; set; }        
             [Display(Name="Giá")]
+            [DisplayFormat(DataFormatString="{0:0,0}",ApplyFormatInEditMode=false)]
             public decimal Price { get; set; }
             [Display(Name="Số lượng")]
             [Required(ErrorMessage = "Nhập số lượng")]
             public decimal Quatity { get; set; }
             [Display(Name="Tổng cộng")]
             [Required(ErrorMessage = "Nhập tổng tiền")]
+            [DisplayFormat(DataFormatString = "{0:0,0}", ApplyFormatInEditMode = false)]
             public decimal Total { get; set; }
             [Display(Name="Ghi chú")]
             public string Note { get; set; }

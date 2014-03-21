@@ -37,5 +37,6 @@ namespace EntityLibrary
         public System.DateTime LastUpdateDate { get; set; }
         public short StatusId { get; set; }
         public bool Deleted { get; set; }
+        public string DeletedNote { get; set; }
     }
 }

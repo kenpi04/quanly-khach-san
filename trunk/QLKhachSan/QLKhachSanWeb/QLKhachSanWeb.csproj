@@ -283,6 +283,7 @@
     <Content Include="Views\Admin\XemLog.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Booking\DeletedBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
