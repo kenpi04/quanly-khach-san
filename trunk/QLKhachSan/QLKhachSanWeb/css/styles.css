@@ -36,7 +36,7 @@ ul {list-style:none }
 .content {margin-top: 86px; }
 .clearboth {clear:both }
 .command {width:940px;margin:0 auto }
-.command li{width:15%;float:left;text-align:center }
+.command li{width:13%;float:left;text-align:center }
 .search {float:right;margin-right:6px }
 .table-data {border:solid 2px  #cccccc ;width:100%;font-size:16px}
 .table-data td {text-align:center }
