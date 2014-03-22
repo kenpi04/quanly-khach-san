@@ -10,7 +10,7 @@ function initSize() {
 }
 
 $(function () {
-    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
+    $(".datepicker").datepicker();
     initSize();
 
 });

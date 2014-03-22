@@ -3,7 +3,7 @@
     $("#popup").html(str);
     UnTip();
     $.validator.unobtrusive.parse($('form')[0]);
-    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
+    $(".datepicker").datepicker();
 }
 function showToolTip(strHTML) {
     Tip(strHTML, WIDTH, 300, ABOVE, true);
@@ -80,7 +80,7 @@ function search(isToday)
     })
 }
 $(function () {
-    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy" });
+    $(".datepicker").datepicker();
     initSize();
 });
 $(document).ready(function () {
